@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 import 'package:scrollv2/AddTaskForm.dart';
+import 'package:scrollv2/CategoryView.dart';
 import 'package:scrollv2/TaskScrollView.dart';
 
 void main() {
   runApp(const MyApp());
 }
-
+void refresh(){
+  // to be filled later..
+}
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -19,8 +22,9 @@ class MyApp extends StatelessWidget {
         body: Container(
           child: Column(
             children: [
-              Container(child: AddTaskForm()),
-              Expanded(child: TaskScrollView()),
+              CartegoryView(refreshCallBack: refresh),
+              AddTaskForm(),
+              Expanded(child: TaskScrollView(refreshCallBack: refresh)),
             ],
           ),
         ),

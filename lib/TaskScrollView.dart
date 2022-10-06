@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:scrollv2/Task.dart';
 
 class TaskScrollView extends StatefulWidget {
+  final Function refreshCallBack;
+
+  TaskScrollView({required this.refreshCallBack});
   @override
   TaskScrollViewState createState() => TaskScrollViewState();
 }
