@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>320</x>
+      <y>130</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>StatefulWidget</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>650</x>
+      <y>130</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>StatelessWidget</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>310</x>
+      <y>200</y>
+      <w>130</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>CategoryView
+--
++refreshCallBack()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>460</x>
+      <y>200</y>
+      <w>130</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>TaskScrollView
+--
++refreshCallBack()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>160</x>
+      <y>200</y>
+      <w>130</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>AddTaskForm
+--
++refreshCallBack()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>150</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>220</x>
+      <y>160</y>
+      <w>180</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;20.0;160.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>160</y>
+      <w>180</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>160.0;40.0;160.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>650</x>
+      <y>200</y>
+      <w>140</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Category
+--
+-title: String
+-color: Color
+-height: double
+-textStyle: TextStyle
+--
++build()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>150</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>330</y>
+      <w>220</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Task
+--
+-title: String
+-start: DateTime
+-end: DateTime
+-alarm: bool?
+-chained: bool?
+-clock: String
+--
++toMap(): Map&lt;String, dynamic&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>240</y>
+      <w>300</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=*</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;280.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>240</y>
+      <w>40</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=*</panel_attributes>
+    <additional_attributes>20.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>120</x>
+      <y>500</y>
+      <w>770</w>
+      <h>480</h>
+    </coordinates>
+    <panel_attributes>Backend
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>120</x>
+      <y>50</y>
+      <w>720</w>
+      <h>440</h>
+    </coordinates>
+    <panel_attributes>Frontend
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>170</x>
+      <y>560</y>
+      <w>310</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>DBConn
+--
+-taskCur: late Database
+-categoryCur: late Database
+--
++openDB(): void
++insertTask(t: Task): void
++removeTask(t: Task, chain: bool?): void
++insertCategory(c: Category): void
++removeCategory(c: Category): void
++getTask(): &lt;Task&gt;[]
++getCategory(): &lt;Category&gt;[]
++exportICS(): void
++syncWithICS(path: path)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>460</x>
+      <y>950</y>
+      <w>430</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Reference: https://flutter-ko.dev/docs/cookbook/persistence/sqlite
+bg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>810</y>
+      <w>350</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>Database: data.db
+--
+TABLE: TASK
+ㄴCOLUMNS: [title, categoryid, clock, alarm, chained]
+TABLE: CATEGORY
+ㄴCOLUMNS: [id, title, color]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>540</x>
+      <y>600</y>
+      <w>300</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>SyncCalendar
+--
+static OAuthGoogle()
+static getICS(direction: bool)
+...
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>320</x>
+      <y>760</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>470</x>
+      <y>630</y>
+      <w>90</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>250</x>
+      <y>240</y>
+      <w>30</w>
+      <h>340</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;320.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>250</x>
+      <y>240</y>
+      <w>110</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;60.0;90.0;60.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>240</y>
+      <w>160</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;60.0;140.0;60.0;140.0;10.0</additional_attributes>
+  </element>
+</diagram>
