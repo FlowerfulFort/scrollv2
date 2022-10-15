@@ -17,17 +17,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Startup Ints Generator',
+      title: 'Scroll',
       home: Scaffold(
-        body: Container(
-          child: Column(
-            children: [
-              CartegoryView(refreshCallBack: refresh),
-              AddTaskForm(),
-              Expanded(child: TaskScrollView(refreshCallBack: refresh)),
-            ],
+        body: SafeArea(   // 또는, padding을 상태창 높이만큼 주면 됨. MediaQuery.of(context).padding.top;
+          child: Container(
+            child: Column(
+              children: [
+                CategoryView(refreshCallBack: refresh),
+                AddTaskForm(),
+                Expanded(child: TaskScrollView(refreshCallBack: refresh)),
+              ],
+            ),
           ),
         ),
+        extendBody: true,
       ),
     );
   }
