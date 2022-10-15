@@ -2,3 +2,8 @@
 
 Simple UI Calendar/Task Manager app
 
+---
+
+## Author
+
+-   FlowerfulFort
