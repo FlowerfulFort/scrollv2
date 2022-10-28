@@ -5,9 +5,7 @@ import 'package:scrollv2/AddTaskForm.dart';
 import 'package:scrollv2/CategoryView.dart';
 import 'package:scrollv2/TaskScrollView.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(MyApp());
 void refresh(){
   // to be filled later..
 }

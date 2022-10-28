@@ -6,6 +6,7 @@
  */
 import 'package:flutter/material.dart';
 import 'package:scrollv2/Task.dart';
+import 'dart:developer' as dev;
 
 class TaskScrollView extends StatefulWidget {
   final Function refreshCallBack;
@@ -23,6 +24,8 @@ class TaskScrollViewState extends State<TaskScrollView> {
 
   @override
   Widget build(BuildContext context) {
+    dev.log('Render: TaskScrollView');
+
     return ListView(
       padding: EdgeInsets.zero,   // remove whitespace on top.
       children: makeTaskList(makeTestTask(20)),

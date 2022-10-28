@@ -11,6 +11,8 @@ class CategoryView extends StatefulWidget {
 class CategoryViewState extends State<CategoryView> {
   @override
   Widget build(BuildContext context) {
+    dev.log('Render: CategoryView');
+
     return Container(
       margin: const EdgeInsets.only(top: 2, bottom: 2),
       child: Row(

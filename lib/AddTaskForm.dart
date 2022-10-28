@@ -2,6 +2,7 @@
  * Stateless로 하는게 낫나? 모르겠다.
  */
 import 'package:flutter/material.dart';
+import 'dart:developer' as dev;
 
 class AddTaskForm extends StatefulWidget {
   @override
@@ -15,6 +16,8 @@ class AddTaskFormState extends State<AddTaskForm> {
 
   @override
   Widget build(BuildContext context) {
+    dev.log('Render: AddTaskForm');
+
     return Container(
         color: Colors.deepOrangeAccent,
         height: 250,
