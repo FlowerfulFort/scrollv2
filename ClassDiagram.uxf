@@ -4,9 +4,9 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>320</x>
-      <y>130</y>
-      <w>120</w>
+      <x>710</x>
+      <y>220</y>
+      <w>140</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>StatefulWidget</panel_attributes>
@@ -15,8 +15,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>650</x>
-      <y>130</y>
+      <x>1050</x>
+      <y>220</y>
       <w>140</w>
       <h>30</h>
     </coordinates>
@@ -26,12 +26,14 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>310</x>
-      <y>200</y>
-      <w>130</w>
-      <h>50</h>
+      <x>710</x>
+      <y>300</y>
+      <w>140</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>CategoryView
+--
+-textStyle: TextStyle
 --
 +refreshCallBack()</panel_attributes>
     <additional_attributes/>
@@ -39,9 +41,9 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>460</x>
-      <y>200</y>
-      <w>130</w>
+      <x>860</x>
+      <y>300</y>
+      <w>140</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>TaskScrollView
@@ -52,9 +54,9 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>160</x>
-      <y>200</y>
-      <w>130</w>
+      <x>560</x>
+      <y>300</y>
+      <w>140</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>AddTaskForm
@@ -65,19 +67,19 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>370</x>
-      <y>150</y>
+      <x>770</x>
+      <y>240</y>
       <w>30</w>
-      <h>70</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>220</x>
-      <y>160</y>
+      <x>620</x>
+      <y>260</y>
       <w>180</w>
       <h>60</h>
     </coordinates>
@@ -88,8 +90,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>370</x>
-      <y>160</y>
+      <x>770</x>
+      <y>260</y>
       <w>180</w>
       <h>60</h>
     </coordinates>
@@ -100,17 +102,16 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>650</x>
-      <y>200</y>
+      <x>1050</x>
+      <y>320</y>
       <w>140</w>
-      <h>120</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>Category
 --
 -title: String
 -color: Color
 -height: double
--textStyle: TextStyle
 --
 +build()
 </panel_attributes>
@@ -119,19 +120,19 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>710</x>
-      <y>150</y>
+      <x>1110</x>
+      <y>240</y>
       <w>30</w>
-      <h>70</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>450</x>
-      <y>330</y>
+      <x>850</x>
+      <y>430</y>
       <w>220</w>
       <h>150</h>
     </coordinates>
@@ -150,58 +151,48 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>370</x>
-      <y>240</y>
+      <x>770</x>
+      <y>360</y>
       <w>300</w>
-      <h>60</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-
-m1=*</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;40.0;280.0;40.0</additional_attributes>
+m1=0..1
+m2=0..*</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;280.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>500</x>
-      <y>240</y>
-      <w>40</w>
+      <x>900</x>
+      <y>340</y>
+      <w>60</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-
-m1=*</panel_attributes>
+m1=0..1
+m2=0..*</panel_attributes>
     <additional_attributes>20.0;10.0;10.0;90.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>120</x>
-      <y>500</y>
+      <x>0</x>
+      <y>930</y>
       <w>770</w>
       <h>480</h>
     </coordinates>
     <panel_attributes>Backend
 --
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLPackage</id>
-    <coordinates>
-      <x>120</x>
-      <y>50</y>
-      <w>720</w>
-      <h>440</h>
-    </coordinates>
-    <panel_attributes>Frontend
---
-</panel_attributes>
+
+group=group-2</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>170</x>
-      <y>560</y>
+      <x>50</x>
+      <y>990</y>
       <w>310</w>
       <h>210</h>
     </coordinates>
@@ -218,26 +209,28 @@ m1=*</panel_attributes>
 +getTask(): &lt;Task&gt;[]
 +getCategory(): &lt;Category&gt;[]
 +exportICS(): void
-+syncWithICS(path: path)</panel_attributes>
++syncWithICS(path: path)
+group=group-2</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>460</x>
-      <y>950</y>
+      <x>340</x>
+      <y>1380</y>
       <w>430</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>Reference: https://flutter-ko.dev/docs/cookbook/persistence/sqlite
-bg=gray</panel_attributes>
+bg=gray
+group=group-2</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>150</x>
-      <y>810</y>
+      <x>30</x>
+      <y>1240</y>
       <w>350</w>
       <h>100</h>
     </coordinates>
@@ -246,14 +239,160 @@ bg=gray</panel_attributes>
 TABLE: TASK
 ㄴCOLUMNS: [title, categoryid, clock, alarm, chained]
 TABLE: CATEGORY
-ㄴCOLUMNS: [id, title, color]</panel_attributes>
+ㄴCOLUMNS: [id, title, color]
+group=group-2</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>540</x>
-      <y>600</y>
+      <x>420</x>
+      <y>1040</y>
+      <w>300</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>SyncCalendar
+--
+static OAuthGoogle()
+static getICS(direction: bool)
+...
+layer=1
+group=group-2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>200</x>
+      <y>1190</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+group=group-2</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>350</x>
+      <y>1070</y>
+      <w>90</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+group=group-2</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>650</x>
+      <y>360</y>
+      <w>110</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;40.0;90.0;40.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>730</x>
+      <y>340</y>
+      <w>160</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;60.0;140.0;60.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1320</x>
+      <y>240</y>
+      <w>130</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>SettingPages</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1320</x>
+      <y>290</y>
+      <w>130</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>DeleteHere</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1320</x>
+      <y>340</y>
+      <w>130</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>EditTaskPopup</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1320</x>
+      <y>390</y>
+      <w>130</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>EditCategoryPopup</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1110</x>
+      <y>400</y>
+      <w>170</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>카테고리를
+드래그 하지 말고
+꾹 누르면 수정/삭제
+팝업창이 나오도록 수정
+bg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>520</x>
+      <y>630</y>
+      <w>280</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>ICSEdit
+--
+-ics: File(.ics)
+-category: File(.json)
+--
++openICS(): void
++insertTask(t: Task): void
++removeTask(t: Task, chain: bool?): void
++insertCategory(c: Category): void
++remove(Category(c:Category): void
++getTask(): &lt;Task&gt;[]
++getCategory(): &lt;Category&gt;[]
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>880</x>
+      <y>690</y>
       <w>300</w>
       <h>80</h>
     </coordinates>
@@ -268,56 +407,23 @@ layer=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>320</x>
-      <y>760</y>
-      <w>30</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>470</x>
-      <y>630</y>
-      <w>90</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>70.0;10.0;10.0;50.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>250</x>
-      <y>240</y>
-      <w>30</w>
-      <h>340</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;320.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>250</x>
-      <y>240</y>
+      <x>790</x>
+      <y>720</y>
       <w>110</w>
-      <h>80</h>
+      <h>30</h>
     </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;60.0;90.0;60.0;90.0;10.0</additional_attributes>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>330</x>
-      <y>240</y>
-      <w>160</w>
-      <h>80</h>
+      <x>650</x>
+      <y>340</y>
+      <w>30</w>
+      <h>310</h>
     </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;60.0;140.0;60.0;140.0;10.0</additional_attributes>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;290.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
