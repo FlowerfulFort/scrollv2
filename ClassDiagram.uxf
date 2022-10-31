@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>639</x>
-      <y>180</y>
+      <y>108</y>
       <w>126</w>
       <h>27</h>
     </coordinates>
@@ -16,7 +16,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>945</x>
-      <y>180</y>
+      <y>108</y>
       <w>126</w>
       <h>27</h>
     </coordinates>
@@ -27,7 +27,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>639</x>
-      <y>252</y>
+      <y>180</y>
       <w>126</w>
       <h>90</h>
     </coordinates>
@@ -44,7 +44,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>774</x>
-      <y>252</y>
+      <y>180</y>
       <w>126</w>
       <h>90</h>
     </coordinates>
@@ -61,7 +61,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>504</x>
-      <y>252</y>
+      <y>180</y>
       <w>126</w>
       <h>90</h>
     </coordinates>
@@ -78,7 +78,7 @@
     <id>Relation</id>
     <coordinates>
       <x>693</x>
-      <y>198</y>
+      <y>126</y>
       <w>27</w>
       <h>72</h>
     </coordinates>
@@ -89,7 +89,7 @@
     <id>Relation</id>
     <coordinates>
       <x>558</x>
-      <y>216</y>
+      <y>144</y>
       <w>162</w>
       <h>54</h>
     </coordinates>
@@ -101,7 +101,7 @@
     <id>Relation</id>
     <coordinates>
       <x>693</x>
-      <y>216</y>
+      <y>144</y>
       <w>162</w>
       <h>54</h>
     </coordinates>
@@ -113,7 +113,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>945</x>
-      <y>270</y>
+      <y>198</y>
       <w>126</w>
       <h>90</h>
     </coordinates>
@@ -131,7 +131,7 @@
     <id>Relation</id>
     <coordinates>
       <x>999</x>
-      <y>198</y>
+      <y>126</y>
       <w>27</w>
       <h>90</h>
     </coordinates>
@@ -142,7 +142,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>747</x>
-      <y>423</y>
+      <y>351</y>
       <w>198</w>
       <h>135</h>
     </coordinates>
@@ -162,7 +162,7 @@
     <id>Relation</id>
     <coordinates>
       <x>693</x>
-      <y>333</y>
+      <y>261</y>
       <w>270</w>
       <h>72</h>
     </coordinates>
@@ -175,7 +175,7 @@ m2=0..*</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>792</x>
-      <y>333</y>
+      <y>261</y>
       <w>72</w>
       <h>108</h>
     </coordinates>
@@ -188,7 +188,7 @@ m2=0..*</panel_attributes>
     <id>UMLPackage</id>
     <coordinates>
       <x>0</x>
-      <y>819</y>
+      <y>747</y>
       <w>693</w>
       <h>432</h>
     </coordinates>
@@ -202,7 +202,7 @@ group=group-2</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>45</x>
-      <y>873</y>
+      <y>801</y>
       <w>279</w>
       <h>189</h>
     </coordinates>
@@ -227,7 +227,7 @@ group=group-2</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>306</x>
-      <y>1224</y>
+      <y>1152</y>
       <w>387</w>
       <h>27</h>
     </coordinates>
@@ -240,7 +240,7 @@ group=group-2</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>27</x>
-      <y>1098</y>
+      <y>1026</y>
       <w>315</w>
       <h>90</h>
     </coordinates>
@@ -257,7 +257,7 @@ group=group-2</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>378</x>
-      <y>918</y>
+      <y>846</y>
       <w>270</w>
       <h>72</h>
     </coordinates>
@@ -274,7 +274,7 @@ group=group-2</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>180</x>
-      <y>1053</y>
+      <y>981</y>
       <w>27</w>
       <h>63</h>
     </coordinates>
@@ -286,7 +286,7 @@ group=group-2</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>315</x>
-      <y>945</y>
+      <y>873</y>
       <w>81</w>
       <h>54</h>
     </coordinates>
@@ -298,7 +298,7 @@ group=group-2</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>585</x>
-      <y>351</y>
+      <y>279</y>
       <w>99</w>
       <h>36</h>
     </coordinates>
@@ -309,7 +309,7 @@ group=group-2</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>657</x>
-      <y>333</y>
+      <y>261</y>
       <w>144</w>
       <h>54</h>
     </coordinates>
@@ -320,7 +320,7 @@ group=group-2</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>306</x>
-      <y>252</y>
+      <y>180</y>
       <w>180</w>
       <h>117</h>
     </coordinates>
@@ -339,7 +339,7 @@ group=group-2</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1287</x>
-      <y>270</y>
+      <y>198</y>
       <w>180</w>
       <h>45</h>
     </coordinates>
@@ -352,7 +352,7 @@ group=group-2</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1098</x>
-      <y>414</y>
+      <y>342</y>
       <w>189</w>
       <h>90</h>
     </coordinates>
@@ -369,7 +369,7 @@ group=group-2</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>468</x>
-      <y>549</y>
+      <y>477</y>
       <w>252</w>
       <h>162</h>
     </coordinates>
@@ -384,23 +384,21 @@ group=group-2</panel_attributes>
 +insertCategory(c: Category): void
 +remove(Category(c:Category): void
 +getTask(): &lt;Task&gt;[]
-+getCategory(): &lt;Category&gt;[]
-</panel_attributes>
++getCategory(): &lt;Category&gt;[]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>810</x>
-      <y>603</y>
+      <y>531</y>
       <w>270</w>
-      <h>72</h>
+      <h>54</h>
     </coordinates>
     <panel_attributes>SyncCalendar
 --
-static OAuthGoogle()
-static getICS(direction: bool)
-...
+static OAuthServer()
+static syncICS()
 layer=1</panel_attributes>
     <additional_attributes/>
   </element>
@@ -408,7 +406,7 @@ layer=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>711</x>
-      <y>630</y>
+      <y>558</y>
       <w>117</w>
       <h>27</h>
     </coordinates>
@@ -419,7 +417,7 @@ layer=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>585</x>
-      <y>333</y>
+      <y>261</y>
       <w>27</w>
       <h>234</h>
     </coordinates>
@@ -430,7 +428,7 @@ layer=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>423</x>
-      <y>216</y>
+      <y>144</y>
       <w>162</w>
       <h>54</h>
     </coordinates>
@@ -442,7 +440,7 @@ layer=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>999</x>
-      <y>216</y>
+      <y>144</y>
       <w>396</w>
       <h>72</h>
     </coordinates>
@@ -454,7 +452,7 @@ layer=1</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>963</x>
-      <y>342</y>
+      <y>270</y>
       <w>153</w>
       <h>63</h>
     </coordinates>
@@ -470,7 +468,7 @@ layer=-3</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1089</x>
-      <y>270</y>
+      <y>198</y>
       <w>180</w>
       <h>90</h>
     </coordinates>
@@ -489,7 +487,7 @@ bg=white
     <id>Relation</id>
     <coordinates>
       <x>711</x>
-      <y>351</y>
+      <y>279</y>
       <w>486</w>
       <h>261</h>
     </coordinates>
@@ -500,7 +498,7 @@ bg=white
     <id>Relation</id>
     <coordinates>
       <x>711</x>
-      <y>441</y>
+      <y>369</y>
       <w>405</w>
       <h>171</h>
     </coordinates>
@@ -511,7 +509,7 @@ bg=white
     <id>Relation</id>
     <coordinates>
       <x>1179</x>
-      <y>225</y>
+      <y>153</y>
       <w>27</w>
       <h>63</h>
     </coordinates>
@@ -523,7 +521,7 @@ bg=white
     <id>Relation</id>
     <coordinates>
       <x>1269</x>
-      <y>225</y>
+      <y>153</y>
       <w>27</w>
       <h>207</h>
     </coordinates>
@@ -535,7 +533,7 @@ bg=white
     <id>UMLNote</id>
     <coordinates>
       <x>1143</x>
-      <y>333</y>
+      <y>261</y>
       <w>126</w>
       <h>63</h>
     </coordinates>
@@ -551,7 +549,7 @@ layer=+100
     <id>UMLNote</id>
     <coordinates>
       <x>1323</x>
-      <y>288</y>
+      <y>216</y>
       <w>126</w>
       <h>63</h>
     </coordinates>
@@ -568,7 +566,7 @@ layer=+100
     <id>UMLNote</id>
     <coordinates>
       <x>1206</x>
-      <y>468</y>
+      <y>396</y>
       <w>126</w>
       <h>81</h>
     </coordinates>
