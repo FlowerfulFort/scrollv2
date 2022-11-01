@@ -13,15 +13,34 @@ class AddTaskFormState extends State<AddTaskForm> {
     color: Colors.white,
     fontSize: 35,
   );
-
+  final titleController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     dev.log('Render: AddTaskForm');
 
     return Container(
-        color: Colors.deepOrangeAccent,
-        height: 250,
-        child: Center(child: Text('Add Task Form Here.', style: style))
+      color: Colors.deepOrangeAccent,
+      // height: 250,
+      child: Container(
+        margin: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 15.0, right: 15.0),
+        child: Column(
+          children: <Widget>[
+            TextField(
+              controller: titleController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: '제목'
+              )
+            ),
+            FloatingActionButton(
+              child: Icon(Icons.print),
+              onPressed: () => {
+                dev.log(titleController.text)
+              }
+            )
+          ],
+        ),
+      ),
     );
   }
 }
