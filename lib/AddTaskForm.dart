@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'dart:developer' as dev;
 
 class AddTaskForm extends StatefulWidget {
+  final Function refreshCallBack;
+  AddTaskForm({required this.refreshCallBack});
   @override
   AddTaskFormState createState() => AddTaskFormState();
 }
@@ -34,8 +36,10 @@ class AddTaskFormState extends State<AddTaskForm> {
             ),
             FloatingActionButton(
               child: Icon(Icons.print),
-              onPressed: () => {
-                dev.log(titleController.text)
+              onPressed: () {
+                dev.log(titleController.text);
+                titleController.clear();
+                widget.refreshCallBack();
               }
             )
           ],

@@ -20,19 +20,25 @@ class Task {
   @override
   String toString() => 'TestTask: $title time: $start-$end';
 }
+
+class TestTask{
+  static int index = 0;
+}
 /* make test task list, size=n*/
 List<Task> makeTestTask(int n) {
+
   var list = <Task>[];
   const String testTitle = 'Test title #';
   for (int i=0;i<n;i++) {
     DateTime start = (Random().nextInt(30) + 30).minutes.fromNow;
     DateTime end = start + (Random().nextInt(30) + 30).minutes;
     var t = Task(
-      testTitle + i.toString(),
+      testTitle + TestTask.index.toString(),
       start,
       end,
       false
     );
+    TestTask.index++;
     list.add(t);
     dev.log('$t');
   }
