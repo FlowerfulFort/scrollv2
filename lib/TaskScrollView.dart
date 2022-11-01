@@ -10,8 +10,8 @@ import 'dart:developer' as dev;
 
 class TaskScrollView extends StatefulWidget {
   final Function refreshCallBack;
-
-  TaskScrollView({required this.refreshCallBack});
+  final Function getData;
+  TaskScrollView({required this.refreshCallBack, required this.getData});
   @override
   TaskScrollViewState createState() => TaskScrollViewState();
 }

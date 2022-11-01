@@ -6,30 +6,14 @@ import 'package:scrollv2/CategoryView.dart';
 import 'package:scrollv2/TaskScrollView.dart';
 
 void main() => runApp(MyApp());
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-  @override
-  MyAppState createState() => MyAppState();
-}
-class MyAppState extends State<MyApp> {
-  void refresh() {
-    setState(() {});
-  }
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Scroll',
       home: Scaffold(
         body: SafeArea(   // 또는, padding을 상태창 높이만큼 주면 됨. MediaQuery.of(context).padding.top;
-          child: Container(
-            child: Column(
-              children: [
-                CategoryView(refreshCallBack: refresh),
-                AddTaskForm(refreshCallBack: refresh),
-                Expanded(child: TaskScrollView(refreshCallBack: refresh)),
-              ],
-            ),
-          ),
+          child: AddTaskForm(),
         ),
         extendBody: true,
       ),
