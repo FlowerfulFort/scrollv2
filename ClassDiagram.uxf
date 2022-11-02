@@ -4,120 +4,76 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>639</x>
-      <y>108</y>
-      <w>126</w>
-      <h>27</h>
+      <x>495</x>
+      <y>252</y>
+      <w>189</w>
+      <h>153</h>
     </coordinates>
-    <panel_attributes>StatefulWidget</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>945</x>
-      <y>108</y>
-      <w>126</w>
-      <h>27</h>
-    </coordinates>
-    <panel_attributes>StatelessWidget</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>639</x>
-      <y>180</y>
-      <w>126</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>CategoryView
+    <panel_attributes>&lt;&lt;StatefulWidget&gt;&gt;
+CategoryView
 --
--textStyle: TextStyle
+-refreshCallBack: Function
+-categoryList: List&lt;Category&gt;
+-selectedCG: String
 --
-+refreshCallBack()
-+addCateHandler()
-+createState()</panel_attributes>
++selectCG(String)
++addCateHandler(String, Color)
++createState()
++export(): Map&lt;String, dynamic&gt;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>774</x>
-      <y>180</y>
-      <w>126</w>
-      <h>90</h>
+      <y>99</y>
+      <w>270</w>
+      <h>126</h>
     </coordinates>
-    <panel_attributes>TaskScrollView
+    <panel_attributes>&lt;&lt;StatefulWidget&gt;&gt;
+TaskScrollView
 --
--textStyle: TextStyle
+-getDataCallback: Function
+-loadedTaskList: List&lt;Task&gt;
 --
-+refreshCallBack()
-+addTaskHandler()
++loadMoreTask(isNext:bool)
++addTaskHandler(task:Map&lt;String, dynamic&gt;)
 +createState()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>504</x>
-      <y>180</y>
-      <w>126</w>
-      <h>90</h>
+      <x>486</x>
+      <y>36</y>
+      <w>189</w>
+      <h>180</h>
     </coordinates>
-    <panel_attributes>AddTaskForm
+    <panel_attributes>&lt;&lt;StatefulWidget&gt;&gt;
+AddTaskForm
 --
--textStyle: TextStyle
+-title: String
+-startTime: int
+-endTime: int
 --
-+refreshCallBack()
-+getTaskInfo()
-+createState()</panel_attributes>
++setStartTime(int)
++setEndTime(int)
++getData()
++refresh()
++createState()
++export(): Map&lt;String, dynamic&gt;</panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>693</x>
-      <y>126</y>
-      <w>27</w>
-      <h>72</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>558</x>
-      <y>144</y>
-      <w>162</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>lt=-
-</panel_attributes>
-    <additional_attributes>10.0;40.0;10.0;20.0;160.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>693</x>
-      <y>144</y>
-      <w>162</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>lt=-
-</panel_attributes>
-    <additional_attributes>160.0;40.0;160.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>945</x>
-      <y>198</y>
+      <x>900</x>
+      <y>252</y>
       <w>126</w>
-      <h>90</h>
+      <h>108</h>
     </coordinates>
-    <panel_attributes>Category
+    <panel_attributes>&lt;&lt;StatelessWidget&gt;&gt;
+Category
 --
 -title: String
 -color: Color
@@ -128,21 +84,10 @@
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>999</x>
-      <y>126</y>
-      <w>27</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>747</x>
-      <y>351</y>
+      <x>1125</x>
+      <y>99</y>
       <w>198</w>
       <h>135</h>
     </coordinates>
@@ -161,34 +106,34 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>693</x>
-      <y>261</y>
-      <w>270</w>
-      <h>72</h>
+      <x>675</x>
+      <y>315</y>
+      <w>243</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=0..1
 m2=0..*</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0;250.0;60.0;250.0;10.0;280.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;250.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>792</x>
-      <y>261</y>
-      <w>72</w>
-      <h>108</h>
+      <x>1035</x>
+      <y>162</y>
+      <w>108</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=0..1
 m2=0..*</panel_attributes>
-    <additional_attributes>40.0;10.0;10.0;100.0</additional_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
     <coordinates>
       <x>0</x>
-      <y>747</y>
+      <y>693</y>
       <w>693</w>
       <h>432</h>
     </coordinates>
@@ -202,7 +147,7 @@ group=group-2</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>45</x>
-      <y>801</y>
+      <y>747</y>
       <w>279</w>
       <h>189</h>
     </coordinates>
@@ -227,7 +172,7 @@ group=group-2</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>306</x>
-      <y>1152</y>
+      <y>1098</y>
       <w>387</w>
       <h>27</h>
     </coordinates>
@@ -240,7 +185,7 @@ group=group-2</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>27</x>
-      <y>1026</y>
+      <y>972</y>
       <w>315</w>
       <h>90</h>
     </coordinates>
@@ -257,7 +202,7 @@ group=group-2</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>378</x>
-      <y>846</y>
+      <y>792</y>
       <w>270</w>
       <h>72</h>
     </coordinates>
@@ -274,7 +219,7 @@ group=group-2</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>180</x>
-      <y>981</y>
+      <y>927</y>
       <w>27</w>
       <h>63</h>
     </coordinates>
@@ -286,7 +231,7 @@ group=group-2</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>315</x>
-      <y>873</y>
+      <y>819</y>
       <w>81</w>
       <h>54</h>
     </coordinates>
@@ -295,36 +240,15 @@ group=group-2</panel_attributes>
     <additional_attributes>70.0;10.0;10.0;40.0</additional_attributes>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>585</x>
-      <y>279</y>
-      <w>99</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;20.0;90.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>657</x>
-      <y>261</y>
-      <w>144</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;40.0;140.0;40.0;140.0;10.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>306</x>
-      <y>180</y>
+      <x>279</x>
+      <y>252</y>
       <w>180</w>
-      <h>117</h>
+      <h>135</h>
     </coordinates>
-    <panel_attributes>SettingPages
+    <panel_attributes>&lt;&lt;StatefulWidget&gt;&gt;
+SettingPages
 --
 -setting_path: File
 -settings: Map&lt;String, String&gt;
@@ -338,12 +262,13 @@ group=group-2</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1287</x>
-      <y>198</y>
+      <x>1152</x>
+      <y>279</y>
       <w>180</w>
-      <h>45</h>
+      <h>63</h>
     </coordinates>
-    <panel_attributes>Trashcan
+    <panel_attributes>&lt;&lt;StatelessWidget&gt;&gt;
+Trashcan
 --
 +build()</panel_attributes>
     <additional_attributes/>
@@ -351,12 +276,13 @@ group=group-2</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1098</x>
-      <y>342</y>
+      <x>900</x>
+      <y>396</y>
       <w>189</w>
-      <h>90</h>
+      <h>108</h>
     </coordinates>
-    <panel_attributes>EditCategoryContextMenu
+    <panel_attributes>&lt;&lt;StatelessWidget&gt;&gt;
+EditCategoryContextMenu
 --
 -target: Category
 -icsEdit: ICSEdit
@@ -369,7 +295,7 @@ group=group-2</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>468</x>
-      <y>477</y>
+      <y>423</y>
       <w>252</w>
       <h>162</h>
     </coordinates>
@@ -390,10 +316,10 @@ group=group-2</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>810</x>
-      <y>531</y>
+      <x>477</x>
+      <y>612</y>
       <w>270</w>
-      <h>54</h>
+      <h>81</h>
     </coordinates>
     <panel_attributes>SyncCalendar
 --
@@ -405,54 +331,30 @@ layer=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>711</x>
-      <y>558</y>
-      <w>117</w>
-      <h>27</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>110.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>585</x>
-      <y>261</y>
+      <x>594</x>
+      <y>576</y>
       <w>27</w>
-      <h>234</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;240.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>423</x>
-      <y>144</y>
-      <w>162</w>
       <h>54</h>
     </coordinates>
-    <panel_attributes>lt=-
-</panel_attributes>
-    <additional_attributes>10.0;40.0;10.0;20.0;160.0;20.0</additional_attributes>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>999</x>
-      <y>144</y>
-      <w>396</w>
-      <h>72</h>
+      <x>693</x>
+      <y>216</y>
+      <w>135</w>
+      <h>225</h>
     </coordinates>
-    <panel_attributes>lt=-
-</panel_attributes>
-    <additional_attributes>420.0;60.0;420.0;20.0;10.0;20.0</additional_attributes>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;230.0;130.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
       <x>963</x>
-      <y>270</y>
+      <y>315</y>
       <w>153</w>
       <h>63</h>
     </coordinates>
@@ -467,12 +369,13 @@ layer=-3</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1089</x>
-      <y>198</y>
+      <x>900</x>
+      <y>540</y>
       <w>180</w>
-      <h>90</h>
+      <h>108</h>
     </coordinates>
-    <panel_attributes>EditTaskContextMenu
+    <panel_attributes>&lt;&lt;StatelessWidget&gt;&gt;
+EditTaskContextMenu
 layer=2
 bg=white
 --
@@ -487,53 +390,29 @@ bg=white
     <id>Relation</id>
     <coordinates>
       <x>711</x>
-      <y>279</y>
-      <w>486</w>
-      <h>261</h>
+      <y>459</y>
+      <w>207</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;270.0;520.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;210.0;140.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>711</x>
-      <y>369</y>
-      <w>405</w>
-      <h>171</h>
+      <y>450</y>
+      <w>207</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;170.0;430.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1179</x>
-      <y>153</y>
-      <w>27</w>
-      <h>63</h>
-    </coordinates>
-    <panel_attributes>lt=-
-</panel_attributes>
-    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1269</x>
-      <y>153</y>
-      <w>27</w>
-      <h>207</h>
-    </coordinates>
-    <panel_attributes>lt=-
-</panel_attributes>
-    <additional_attributes>10.0;210.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;20.0;210.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1143</x>
-      <y>261</y>
+      <x>999</x>
+      <y>423</y>
       <w>126</w>
       <h>63</h>
     </coordinates>
@@ -548,8 +427,8 @@ layer=+100
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1323</x>
-      <y>216</y>
+      <x>1215</x>
+      <y>306</y>
       <w>126</w>
       <h>63</h>
     </coordinates>
@@ -565,8 +444,8 @@ layer=+100
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1206</x>
-      <y>396</y>
+      <x>999</x>
+      <y>585</y>
       <w>126</w>
       <h>81</h>
     </coordinates>
@@ -577,5 +456,30 @@ layer=+100
 수정 | 삭제
 bg=gray</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>666</x>
+      <y>144</y>
+      <w>126</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=-
+get Callback
+Function</panel_attributes>
+    <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>558</x>
+      <y>207</y>
+      <w>144</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=-
+get Calback Function</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
   </element>
 </diagram>
