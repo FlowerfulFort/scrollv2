@@ -68,6 +68,7 @@ class AddTaskFormState extends State<AddTaskForm> {
                         onPressed: () {
                           dev.log(titleController.text);
                           titleController.clear();
+                          render();
                           // widget.refreshCallBack();
                         }
                     )

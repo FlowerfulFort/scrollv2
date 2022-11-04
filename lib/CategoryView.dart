@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:developer' as dev;
-import 'Category.dart';
+import 'package:scrollv2/Category.dart';
 class CategoryView extends StatefulWidget {
   final Function refreshCallBack;
   final List<Category> categoryList;

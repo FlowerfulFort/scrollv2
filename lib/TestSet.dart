@@ -1,11 +1,11 @@
-import 'Task.dart';
-import 'Category.dart';
 import 'dart:math';
-import 'package:time/time.dart';
 import 'dart:developer' as dev;
+import 'package:time/time.dart';
 import 'package:tuple/tuple.dart';
 import 'package:flutter/material.dart';
 import 'package:from_css_color/from_css_color.dart';
+import 'package:scrollv2/Task.dart';
+import 'package:scrollv2/Category.dart';
 
 typedef TestSet = Tuple2<List<Category>, List<Task>>;
 
@@ -50,14 +50,13 @@ Future<List<Task>> makeTestTask(List<Category> cat, int n) async{
     DateTime start = _generateTime();
     DateTime end = start + (rand.nextInt(30) + 30).minutes;
     var t = Task(
-        'T#$i ${start.time} - ${end.time}',
+        'T#${TestTask.index++} ${start.time} - ${end.time}',
         start,
         end,
         cat[rand.nextInt(cat.length)].color,
         // colorList[rand.nextInt(colorList.length)],
         rand.nextInt(1).toBool
     );
-    TestTask.index++;
     list.add(t);
     dev.log('$t');
   }
@@ -75,13 +74,12 @@ Future<List<Task>> makeTestTaskNonCat(int n) async {
     DateTime start = _generateTime();
     DateTime end = start + (rand.nextInt(30) + 30).minutes;
     var t = Task(
-        'T#$i ${start.clock}-${end.clock}',
+        'T#${TestTask.index++} ${start.clock}-${end.clock}',
         start,
         end,
         copiedList[rand.nextInt(copiedList.length)],
         rand.nextInt(1).toBool
     );
-    TestTask.index++;
     list.add(t);
     dev.log('$t');
   }
