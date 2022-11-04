@@ -3,7 +3,8 @@ import 'dart:developer' as dev;
 import 'Category.dart';
 class CategoryView extends StatefulWidget {
   final Function refreshCallBack;
-  CategoryView({required this.refreshCallBack});
+  final List<Category> categoryList;
+  CategoryView({required this.refreshCallBack, required this.categoryList});
 
   @override
   CategoryViewState createState() => CategoryViewState();
@@ -23,14 +24,15 @@ class CategoryViewState extends State<CategoryView> {
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: <Widget>[
-                  Category(title: 'Cate1', color: Colors.lightGreenAccent),
-                  Category(title: 'Cate2', color: Colors.lightBlueAccent.shade100),
-                  Category(title: 'Category', color: Colors.lightGreenAccent),
-                  Category(title: 'Category12', color: Colors.lightBlueAccent),
-                  Category(title: 'Cate6534', color: Colors.lightGreenAccent),
-                  Category(title: 'Cate19749', color: Colors.lightBlueAccent),
-                ],
+                children: widget.categoryList
+                // children: <Widget>[
+                //   Category(title: 'Cate1', color: Colors.lightGreenAccent),
+                //   Category(title: 'Cate2', color: Colors.lightBlueAccent.shade100),
+                //   Category(title: 'Category', color: Colors.lightGreenAccent),
+                //   Category(title: 'Category12', color: Colors.lightBlueAccent),
+                //   Category(title: 'Cate6534', color: Colors.lightGreenAccent),
+                //   Category(title: 'Cate19749', color: Colors.lightBlueAccent),
+                // ],
               ),
             ),
           ),

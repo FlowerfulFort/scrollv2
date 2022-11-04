@@ -28,7 +28,7 @@ class TestTask{
   static int index = 0;   // 테스트일정 구분을 위한 static variable.
 }
 DateTime _generateTime() {
-  final rand = Random();
+  final rand = Random(0.seconds.fromNow.microsecond);
   var day = rand.nextInt(6).days.fromNow - 3.days; // -3 ~ 3 day
   day += (rand.nextInt(24) - 12).hours;
   return day;
@@ -50,7 +50,7 @@ Future<List<Task>> makeTestTask(List<Category> cat, int n) async{
     DateTime start = _generateTime();
     DateTime end = start + (rand.nextInt(30) + 30).minutes;
     var t = Task(
-        'T#$i ${start.clock}-${end.clock}',
+        'T#$i ${start.time} - ${end.time}',
         start,
         end,
         cat[rand.nextInt(cat.length)].color,
@@ -100,4 +100,5 @@ Future<TestSet> makeTest(int taskN) async {
   );
   final tasklist = await makeTestTask(cat, taskN);
   return Tuple2(cat, tasklist);
+
 }

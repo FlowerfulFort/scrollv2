@@ -5,20 +5,22 @@
  * 특정한 지점으로 이동할때 State를 해당 날짜로 바꾸어 다시 렌더링 하면 될듯..
  */
 import 'package:flutter/material.dart';
+import 'package:from_css_color/from_css_color.dart';
 import 'package:scrollv2/Task.dart';
 import 'dart:developer' as dev;
 
 class TaskScrollView extends StatefulWidget {
   final Function refreshCallBack;
   final Function getData;
-  TaskScrollView({required this.refreshCallBack, required this.getData});
+  final List<Task> taskList;
+  TaskScrollView({required this.refreshCallBack, required this.getData, required this.taskList});
   @override
   TaskScrollViewState createState() => TaskScrollViewState();
 }
 
 class TaskScrollViewState extends State<TaskScrollView> {
   TextStyle testStyle = const TextStyle(
-    color: Colors.blueAccent,
+    color: Colors.white54,
     fontSize: 25,
   );
 
@@ -28,14 +30,14 @@ class TaskScrollViewState extends State<TaskScrollView> {
 
     return ListView(
       padding: EdgeInsets.zero,   // remove whitespace on top.
-      children: makeTaskList(makeTestTask(20)),
+      children: _makeTaskList(widget.taskList),
     );
   }
 
-  List<Widget> makeTaskList(List<Task> l) {
+  List<Widget> _makeTaskList(List<Task> l) {
     return l.map((task) =>    // update code for viewing time required...
         Container(
-          color: Colors.lightGreenAccent,
+          color: fromCssColor(task.color),
           child: Text(task.title, style: testStyle),
     )).toList();
   }

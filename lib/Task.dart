@@ -3,7 +3,10 @@ import 'dart:developer' as dev;
 import 'dart:math';
 import 'package:flutter/material.dart';
 extension TimeParse on DateTime{
-  String get clock => '$minute:$second';
+  String get clock => '$hour2:$minute2';
+  String get time => '$month/$day $clock';
+  String get hour2 => '${hour<10 ? '0$hour' : hour}';
+  String get minute2 => '${minute<10 ? '0$minute' : minute}';
 }
 
 class Task {
@@ -14,7 +17,8 @@ class Task {
   DateTime end;
   bool? alarm;
   String color;   // CSS3 Color keyword
-  String get clock => '${start.minute}:${start.second}';
+  String get clock => '${start.hour2}:${start.minute2}';
+  String get time => '${start.month}/${start.day} $clock';
   @override
   String toString() => 'TestTask: $title time: $start ~ $end';
 }
