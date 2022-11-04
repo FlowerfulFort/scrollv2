@@ -1,30 +1,26 @@
 import 'package:time/time.dart';
 import 'dart:developer' as dev;
 import 'dart:math';
-
+import 'package:flutter/material.dart';
 extension TimeParse on DateTime{
   String get clock => '$minute:$second';
 }
 
 class Task {
-  Task(this.title, this.start, this.end, this.alarm);
-  Task.na(this.title, this.start, this.end) {
-    alarm = false;
-  }
+  Task(this.title, this.start, this.end, this.color, this.alarm);
+  Task.na(this.title, this.start, this.end, this.color);
   String title;
   DateTime start;
   DateTime end;
   bool? alarm;
-
+  String color;   // CSS3 Color keyword
   String get clock => '${start.minute}:${start.second}';
   @override
-  String toString() => 'TestTask: $title time: $start-$end';
+  String toString() => 'TestTask: $title time: $start ~ $end';
 }
 
-class TestTask{
-  static int index = 0;
-}
-/* make test task list, size=n*/
+
+/* make test task list, size=n
 List<Task> makeTestTask(int n) {
 
   var list = <Task>[];
@@ -32,11 +28,11 @@ List<Task> makeTestTask(int n) {
   for (int i=0;i<n;i++) {
     DateTime start = (Random().nextInt(30) + 30).minutes.fromNow;
     DateTime end = start + (Random().nextInt(30) + 30).minutes;
-    var t = Task(
+    var t = Task.na(
       testTitle + TestTask.index.toString(),
       start,
       end,
-      false
+      Colors.blue
     );
     TestTask.index++;
     list.add(t);
@@ -54,3 +50,4 @@ List<Task> makeTestTask(int n) {
   // ];
   return list;
 }
+*/

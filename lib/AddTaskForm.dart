@@ -3,13 +3,13 @@
  */
 import 'package:flutter/material.dart';
 import 'package:time/time.dart';
+// import 'ICSEdit.dart';
 import 'TaskScrollView.dart';
 import 'CategoryView.dart';
+import 'Category.dart';
 import 'dart:developer' as dev;
 
 class AddTaskForm extends StatefulWidget {
-  // final Function refreshCallBack;
-  // AddTaskForm({required this.refreshCallBack});
   @override
   AddTaskFormState createState() => AddTaskFormState();
 }
@@ -28,7 +28,10 @@ class AddTaskFormState extends State<AddTaskForm> {
   @override
   Widget build(BuildContext context) {
     dev.log('Render: AddTaskForm');
-
+    // ICSEdit a = ICSEdit();
+    // a.localPath.then((path) {
+    //   dev.log('ICSEdit: $path');
+    // });
     return Column(
       children: <Widget>[
         CategoryView(refreshCallBack: render),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:developer' as dev;
+import 'Category.dart';
 class CategoryView extends StatefulWidget {
   final Function refreshCallBack;
   CategoryView({required this.refreshCallBack});
@@ -19,30 +20,6 @@ class CategoryViewState extends State<CategoryView> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Expanded(
-            //height:30,
-            //width:200,
-            //height:30,
-            //child: Cartegory(title: 'cart1', color: Colors.lightBlueAccent)
-            /*child: ListView(
-              //shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                Cartegory(title: 'Cart1', color: Colors.lightGreenAccent),
-                Cartegory(title: 'Cart2', color: Colors.lightBlueAccent),
-                Cartegory(title: 'Cart1', color: Colors.lightGreenAccent),
-                Cartegory(title: 'Cart2', color: Colors.lightBlueAccent),
-                Cartegory(title: 'Cart1', color: Colors.lightGreenAccent),
-                Cartegory(title: 'Cart2', color: Colors.lightBlueAccent),
-              ]
-            )
-             */
-/*
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, i) =>
-                Cartegory(title: 'Cart1', color: Colors.lightBlueAccent)
-            )
- */
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -66,34 +43,6 @@ class CategoryViewState extends State<CategoryView> {
           ),
         ],
       ),
-    );
-  }
-}
-
-class Category extends StatelessWidget {
-  final String title;
-  final Color color;
-  final double height=30;
-  final TextStyle textStyle = const TextStyle(
-    color: Colors.white,
-    fontSize: 20,
-  );
-  Category({required this.title, required this.color});
-  @override
-  Widget build(BuildContext context) {
-    return LongPressDraggable(
-      onDragStarted: () => dev.log('Drag Category: $title at ${DateTime.now()}'),
-      childWhenDragging: Container(),
-      feedback: Material(child: this),
-      child: Container(
-        color: color,
-        margin: const EdgeInsets.only(left: 5.0, right: 5.0),
-        padding: const EdgeInsets.only(left: 8, right: 8, top: 3, bottom: 3),
-        child: Center(
-          child: Text(title, style: textStyle),
-        ),
-      ),
-      //onLongPress: () => dev.log('Category Long Pressed: $title at ${DateTime.now()}'),
     );
   }
 }
