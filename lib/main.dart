@@ -6,33 +6,44 @@ import 'package:scrollv2/CategoryView.dart';
 import 'package:scrollv2/TaskScrollView.dart';
 
 void main() => runApp(MyApp());
-void refresh(){
-  // to be filled later..
-}
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Scroll',
       home: Scaffold(
         body: SafeArea(   // 또는, padding을 상태창 높이만큼 주면 됨. MediaQuery.of(context).padding.top;
-          child: Container(
-            child: Column(
-              children: [
-                CategoryView(refreshCallBack: refresh),
-                AddTaskForm(),
-                Expanded(child: TaskScrollView(refreshCallBack: refresh)),
-              ],
-            ),
-          ),
+          child: AddTaskForm(),
         ),
         extendBody: true,
       ),
     );
   }
 }
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Scroll',
+//       home: Scaffold(
+//         body: SafeArea(   // 또는, padding을 상태창 높이만큼 주면 됨. MediaQuery.of(context).padding.top;
+//           child: Container(
+//             child: Column(
+//               children: [
+//                 CategoryView(refreshCallBack: refresh),
+//                 AddTaskForm(refreshCallBack: refresh),
+//                 Expanded(child: TaskScrollView(refreshCallBack: refresh)),
+//               ],
+//             ),
+//           ),
+//         ),
+//         extendBody: true,
+//       ),
+//     );
+//   }
+// }
 class TestGround extends StatelessWidget {
   TestGround();
 
