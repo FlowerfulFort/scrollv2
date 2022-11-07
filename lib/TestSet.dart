@@ -126,14 +126,15 @@ const vTimeZone =
     'END:STANDARD\n'
     'END:VTIMEZONE\n';
 
+// 테스트ICS 파일을 만들어주는 메소드.
 Future<void> makeICSTest(List<Task> tasklist) async {
-  final path = (await getApplicationDocumentsDirectory()).path;
+  final path = (await getApplicationDocumentsDirectory()).path; // 데이터 path
   File ics = File('$path/data.ics');
-  StringBuffer sb = StringBuffer();
-  sb.write(vCalHeader);
+  StringBuffer sb = StringBuffer();   // java의 StringBuilder
+  sb.write(vCalHeader);               // sb.append()
   for (var task in tasklist) {
-    sb.write(task.vevent);
+    sb.write(task.vevent);            // Task.vevent getter를 사용해 VEVENT 문자열을 받음(Task.dart 참조).
   }
-  sb.write(vCalFooter);
-  ics.writeAsStringSync(sb.toString(), mode: FileMode.write);
+  sb.write(vCalFooter);               // VCALENDAR footer
+  ics.writeAsStringSync(sb.toString(), mode: FileMode.write); // 파일 write.
 }

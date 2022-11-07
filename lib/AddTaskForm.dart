@@ -50,13 +50,16 @@ class AddTaskFormState extends State<AddTaskForm> {
           ));
         }
         else {
+          // 생성된 테스트 List<Task>를 받아서(snapshot.data.item2) ICS 파일을 쓴 후,
+          // 다시 그 파일을 읽어 log로 확인하는 모습입니다.
           makeICSTest(snapshot.data.item2).then((resolve) async {
             dev.log('ICS Written');
             final dir = (await getApplicationDocumentsDirectory()).path;
             final ics = File('$dir/data.ics');
-            final data = ics.readAsStringSync();
-            dev.log('ICSDATA:\n$data');
+            final data = ics.readAsStringSync();    // file read.
+            dev.log('ICSDATA:\n$data');             // print to log.
           });
+          /* !!!!!!!!! else부터 return Column까지 공간에 테스트할 메소드를 넣어주세요 !!!!!!!!!!!*/
           return Column(
             children: <Widget>[
               CategoryView(refreshCallBack: render, categoryList: snapshot.data.item1),
@@ -75,7 +78,9 @@ class AddTaskFormState extends State<AddTaskForm> {
                     ),
                     FloatingActionButton(
                         child: const Icon(Icons.print),
-                        onPressed: () {
+                        onPressed: () async {
+                          dev.log('Re-render after 3 seconds...');
+                          await Future.delayed(3.seconds);
                           dev.log(titleController.text);
                           titleController.clear();
                           render();
@@ -96,4 +101,10 @@ class AddTaskFormState extends State<AddTaskForm> {
       },
     );
   }
+}
+
+Future<void> testmethod() async {
+  await Future.delayed(2.seconds, () {
+    dev.log('2sec delayed!');
+  });
 }
