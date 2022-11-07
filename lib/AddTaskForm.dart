@@ -2,6 +2,7 @@
  * Stateless로 하는게 낫나? 모르겠다.
  */
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:time/time.dart';
 // import 'ICSEdit.dart';
 import 'package:scrollv2/TaskScrollView.dart';
@@ -9,6 +10,7 @@ import 'package:scrollv2/CategoryView.dart';
 // import 'package:scrollv2/Category.dart';
 import 'package:scrollv2/TestSet.dart';
 import 'dart:developer' as dev;
+import 'dart:io';
 
 class AddTaskForm extends StatefulWidget {
   @override
@@ -29,6 +31,7 @@ class AddTaskFormState extends State<AddTaskForm> {
   @override
   Widget build(BuildContext context) {
     dev.log('Render: AddTaskForm');
+    // dev.log(icsHeader);
     // ICSEdit a = ICSEdit();
     // a.localPath.then((path) {
     //   dev.log('ICSEdit: $path');
@@ -47,10 +50,17 @@ class AddTaskFormState extends State<AddTaskForm> {
           ));
         }
         else {
+          makeICSTest(snapshot.data.item2).then((resolve) async {
+            dev.log('ICS Written');
+            final dir = (await getApplicationDocumentsDirectory()).path;
+            final ics = File('$dir/data.ics');
+            final data = ics.readAsStringSync();
+            dev.log('ICSDATA:\n$data');
+          });
           return Column(
             children: <Widget>[
               CategoryView(refreshCallBack: render, categoryList: snapshot.data.item1),
-              Container(
+              Container(    // body of AddTaskForm.
                 padding: const EdgeInsets.only(
                     top: 10.0, bottom: 10.0, left: 15.0, right: 15.0),
                 color: Colors.deepOrangeAccent.shade200,

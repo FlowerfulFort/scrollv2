@@ -1,11 +1,13 @@
 import 'dart:math';
 import 'dart:developer' as dev;
+import 'dart:io';
 import 'package:time/time.dart';
 import 'package:tuple/tuple.dart';
 import 'package:flutter/material.dart';
 import 'package:from_css_color/from_css_color.dart';
 import 'package:scrollv2/Task.dart';
 import 'package:scrollv2/Category.dart';
+import 'package:path_provider/path_provider.dart';
 
 typedef TestSet = Tuple2<List<Category>, List<Task>>;
 
@@ -85,7 +87,7 @@ Future<List<Task>> makeTestTaskNonCat(int n) async {
   }
   return list;
 }
-
+// for TaskScrollView Testing..
 Future<TestSet> makeTest(int taskN) async {
   final copiedList = _extractColorList(5);
   final catLen = copiedList.length;
@@ -99,4 +101,39 @@ Future<TestSet> makeTest(int taskN) async {
   final tasklist = await makeTestTask(cat, taskN);
   return Tuple2(cat, tasklist);
 
+}
+
+// for ICSEdit Testing..
+const vCalHeader =  // it is not perfect.
+    r'BEGIN:VCALENDAR''\n'
+    r'VERSION:2.0''\n'
+    r'PRODID:-//FlowerfulFort//Scrollv2''\n'
+    r'CALSCALE:GREGORIAN''\n'
+    r'METHOD:PUBLISH''\n'
+    r'X-WR-TIMEZONE:Asia/Seoul''\n';
+
+const vCalFooter =
+    r'END:VCALENDAR''\n';
+
+const vTimeZone =
+    'BEGIN:VTIMEZONE\n'
+    'TZID:Asia/Seoul\n'
+    'BEGIN:STANDARD\n'
+    'DTSTART:19700101T000000\n'
+    'TZNAME:GMT+09:00\n'
+    'TZOFFSETFROM:+0900\n'
+    'TZOFFSETTO:+0900\n'
+    'END:STANDARD\n'
+    'END:VTIMEZONE\n';
+
+Future<void> makeICSTest(List<Task> tasklist) async {
+  final path = (await getApplicationDocumentsDirectory()).path;
+  File ics = File('$path/data.ics');
+  StringBuffer sb = StringBuffer();
+  sb.write(vCalHeader);
+  for (var task in tasklist) {
+    sb.write(task.vevent);
+  }
+  sb.write(vCalFooter);
+  ics.writeAsStringSync(sb.toString(), mode: FileMode.write);
 }

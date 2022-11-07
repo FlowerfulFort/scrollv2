@@ -7,9 +7,19 @@ extension TimeParse on DateTime{
   String get time => '$month/$day $clock';
   String get hour2 => '${hour<10 ? '0$hour' : hour}';
   String get minute2 => '${minute<10 ? '0$minute' : minute}';
+  String get serialize {
+    var temp = toIso8601String();
+    temp = temp.substring(0, temp.indexOf('.'));
+    temp = temp.split(RegExp(r'[-:]')).join();
+    if (isUtc) temp += 'Z';
+    return temp;
+  }
 }
 
+const VEVENT_HEADER = 'BEGIN:VEVENT';
+const VEVENT_FOOTER = 'END:VEVENT';
 class Task {
+  static int sequence = 0;
   Task(this.title, this.start, this.end, this.color, this.alarm);
   Task.na(this.title, this.start, this.end, this.color);
   String title;
@@ -19,6 +29,18 @@ class Task {
   String color;   // CSS3 Color keyword
   String get clock => '${start.hour2}:${start.minute2}';
   String get time => '${start.month}/${start.day} $clock';
+  String get vevent =>
+      '$VEVENT_HEADER\n'
+      'UID:${title.split(RegExp(r'[- /:.]')).join()}_${start.serialize}\n'
+      'DTSTART:${start.serialize}\n'
+      'DTEND:${end.serialize}\n'
+      'CREATED:${DateTime.now().serialize}\n'
+      'COLOR:$color\n'
+      'LAST-MODIFIED:${DateTime.now().serialize}\n'
+      'LOCATION:\n'
+      'SEQUENCE:${Task.sequence++}\n'
+      'SUMMARY:$title\n'
+      '$VEVENT_FOOTER\n';
   @override
   String toString() => 'TestTask: $title time: $start ~ $end';
 }
