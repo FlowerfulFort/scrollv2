@@ -5,40 +5,100 @@
  * 특정한 지점으로 이동할때 State를 해당 날짜로 바꾸어 다시 렌더링 하면 될듯..
  */
 import 'package:flutter/material.dart';
-import 'package:from_css_color/from_css_color.dart';
-import 'package:scrollv2/Task.dart';
-import 'dart:developer' as dev;
+import 'package:infinite_listview/infinite_listview.dart';
+import 'package:intl/intl.dart';
+import 'Task.dart';
+
+
+class TaskObject {
+  String? title;
+  DateTime? start;
+  DateTime? end;
+
+  TaskObject(this.title, this.start, this.end);
+}
 
 class TaskScrollView extends StatefulWidget {
   final Function refreshCallBack;
   final Function getData;
   final List<Task> taskList;
-  TaskScrollView({required this.refreshCallBack, required this.getData, required this.taskList});
-  @override
-  TaskScrollViewState createState() => TaskScrollViewState();
+  final DateTime _today = DateTime.now();
+  final List<TaskObject> _tasks = [];
+
+  TaskScrollView({required this.refreshCallBack, required this.getData, required this.taskList}) {
+    _tasks.add(TaskObject('test1', _today.add(Duration(hours: 1)),
+        _today.add(Duration(hours: 2))));
+    _tasks.add(TaskObject('test2', _today.add(Duration(hours: 3)),
+        _today.add(Duration(hours: 4))));
+  }
+
+  _TaskScrollViewState createState() => _TaskScrollViewState();
 }
 
-class TaskScrollViewState extends State<TaskScrollView> {
-  TextStyle testStyle = const TextStyle(
-    color: Colors.white54,
-    fontSize: 25,
+class _TaskScrollViewState extends State<TaskScrollView> {
+  final InfiniteScrollController _infiniteController = InfiniteScrollController(
+    initialScrollOffset: 5.0,
   );
 
   @override
   Widget build(BuildContext context) {
-    dev.log('Render: TaskScrollView');
-
-    return ListView(
-      padding: EdgeInsets.zero,   // remove whitespace on top.
-      children: _makeTaskList(widget.taskList),
-    );
+    return DefaultTabController(length: 1, child: _buildTab(widget._today));
   }
 
-  List<Widget> _makeTaskList(List<Task> l) {
-    return l.map((task) =>    // update code for viewing time required...
-        Container(
-          color: fromCssColor(task.color),
-          child: Text(task.title, style: testStyle),
-    )).toList();
+  List<Widget> getTasksTiles(var tasks) {
+    List<Widget> ret = [];
+    for (var task in tasks) {
+      ret.add(ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.lightBlue,
+            minimumSize: const Size.fromHeight(30),
+          ),
+          child: Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                  padding: EdgeInsets.all(2),
+                  child: Text(
+                    "${task.title}\n${DateFormat('a hh:mm', 'ko').format(task.start)} "
+                        "~ ${DateFormat('a hh:mm', 'ko').format(task.end)}",
+                  )))));
+    }
+    return ret;
+  }
+
+  Widget _buildTab(DateTime today) {
+    return InfiniteListView.separated(
+      controller: _infiniteController,
+      itemBuilder: (BuildContext context, int index) {
+        var targetDate = today.add(Duration(days: index));
+        return Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+              alignment: Alignment.center,
+              child: Text(
+                DateFormat('dd\nE', 'ko').format(targetDate),
+                style: TextStyle(
+                  color: targetDate.weekday == DateTime.sunday
+                      ? Colors.red
+                      : Colors.black,
+                  fontSize: 14,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Expanded(
+              child: Column(
+                children: [...getTasksTiles(widget._tasks)],
+              ),
+            ),
+            const SizedBox(width: 15)
+          ],
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) =>
+      const Divider(height: 1.5, color: Color(0xffAAAAAA)),
+      anchor: 0.0,
+    );
   }
 }

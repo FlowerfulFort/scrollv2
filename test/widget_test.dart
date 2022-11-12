@@ -1,30 +1,120 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:infinite_listview/infinite_listview.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart';
 
-import 'package:scrollv2/main.dart';
+class TaskObject {
+  String? title;
+  DateTime? start;
+  DateTime? end;
 
-void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  TaskObject(this.title, this.start, this.end);
+}
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+void main() => runApp(ExampleApp());
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+class ExampleApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: SafeArea(child: ExampleScreen()),
+        extendBody: true,
+      ),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('ko', 'KR'),
+      ],
+      locale: const Locale('ko'),
+    );
+  }
+}
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
+class ExampleScreen extends StatefulWidget {
+  @override
+  DateTime _today = DateTime.now();
+
+  List<TaskObject> _tasks = [];
+
+  ExampleScreen() {
+    _tasks.add(TaskObject('test1', _today.add(Duration(hours: 1)),
+        _today.add(Duration(hours: 2))));
+    _tasks.add(TaskObject('test2', _today.add(Duration(hours: 3)),
+        _today.add(Duration(hours: 4))));
+  }
+
+  _ExampleScreenState createState() => _ExampleScreenState();
+}
+
+class _ExampleScreenState extends State<ExampleScreen> {
+  final InfiniteScrollController _infiniteController = InfiniteScrollController(
+    initialScrollOffset: 5.0,
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(length: 1, child: _buildTab(widget._today));
+  }
+
+  List<Widget> getTasksTiles(var tasks) {
+    List<Widget> ret = [];
+    for (var task in tasks) {
+      ret.add(ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.lightBlue,
+            minimumSize: const Size.fromHeight(30),
+          ),
+          child: Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                  padding: EdgeInsets.all(2),
+                  child: Text(
+                    "${task.title}\n${DateFormat('a hh:mm', 'ko').format(task.start)} "
+                    "~ ${DateFormat('a hh:mm', 'ko').format(task.end)}",
+                  )))));
+    }
+    return ret;
+  }
+
+  Widget _buildTab(DateTime today) {
+    return InfiniteListView.separated(
+      controller: _infiniteController,
+      itemBuilder: (BuildContext context, int index) {
+        var targetDate = today.add(Duration(days: index));
+        return Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+              alignment: Alignment.center,
+              child: Text(
+                DateFormat('dd\nE', 'ko').format(targetDate),
+                style: TextStyle(
+                  color: targetDate.weekday == DateTime.sunday
+                      ? Colors.red
+                      : Colors.black,
+                  fontSize: 14,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Expanded(
+              child: Column(
+                children: [...getTasksTiles(widget._tasks)],
+              ),
+            ),
+            const SizedBox(width: 15)
+          ],
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) =>
+          const Divider(height: 1.5, color: Color(0xffAAAAAA)),
+      anchor: 0.0,
+    );
+  }
 }
