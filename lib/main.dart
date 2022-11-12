@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:scrollv2/AddTaskForm.dart';
 import 'package:scrollv2/CategoryView.dart';
 import 'package:scrollv2/TaskScrollView.dart';
@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Scroll',
       home: Scaffold(
         body: SafeArea(   // 또는, padding을 상태창 높이만큼 주면 됨. MediaQuery.of(context).padding.top;
@@ -17,6 +18,15 @@ class MyApp extends StatelessWidget {
         ),
         extendBody: true,
       ),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('ko', 'KR'),
+      ],
+      locale: const Locale('ko'),
     );
   }
 }
