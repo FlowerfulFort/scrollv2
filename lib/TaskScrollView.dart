@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:infinite_listview/infinite_listview.dart';
 import 'package:intl/intl.dart';
 import 'Task.dart';
-
+import 'dart:developer' as dev;
 
 class TaskObject {
   String? title;
@@ -49,7 +49,9 @@ class _TaskScrollViewState extends State<TaskScrollView> {
     List<Widget> ret = [];
     for (var task in tasks) {
       ret.add(ElevatedButton(
-          onPressed: () {},
+          onPressed: () {   // 일단 누르면 log에 일정정보 출력
+            dev.log('${task.title}: ${task.start} ~ ${task.end}');
+          },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.lightBlue,
             minimumSize: const Size.fromHeight(30),

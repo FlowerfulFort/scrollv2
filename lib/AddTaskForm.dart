@@ -1,8 +1,11 @@
 /* Widget: AddTaskForm
  * Stateless로 하는게 낫나? 모르겠다.
  */
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:scrollv2/style.dart';
 import 'package:time/time.dart';
 // import 'ICSEdit.dart';
 import 'package:scrollv2/TaskScrollView.dart';
@@ -11,6 +14,7 @@ import 'package:scrollv2/CategoryView.dart';
 import 'package:scrollv2/TestSet.dart';
 import 'dart:developer' as dev;
 import 'dart:io';
+import 'package:scrollv2/DurationPicker.dart';
 
 class AddTaskForm extends StatefulWidget {
   @override
@@ -18,16 +22,36 @@ class AddTaskForm extends StatefulWidget {
 }
 class AddTaskFormState extends State<AddTaskForm> {
   TextStyle style = const TextStyle(
-    color: Colors.white,
+    color: Colors.lightGreen,
     fontSize: 35,
   );
+  late TimeOfDay _start, _end;
+  late int datemode;
+  // late var _debug;
   // bool filtering = false;
   // Category? filtered;
   final titleController = TextEditingController();
 
   /* test data.. */
-  void getData() => {'title': 'test', 'time': 0.seconds.fromNow};
+  void setDuration(TimeOfDay s, TimeOfDay e) {
+    _start = s; _end = e;
+  }
+  void getData() => {
+    'title': 'test',
+    'startTime': _start,
+    'endTime': _end
+  };
   void render() => setState(() {});
+  @override
+  void initState() {
+    // for debugging.
+    Timer.periodic(5.seconds, (timer) {
+      dev.log('$_start, $_end');
+    });
+    // TODO: to be changed to get parameter from settings.json
+    datemode = 0; // 0=am/pm, 1=24hours
+  }
+
   @override
   Widget build(BuildContext context) {
     dev.log('Render: AddTaskForm');
@@ -66,27 +90,43 @@ class AddTaskFormState extends State<AddTaskForm> {
               Container(    // body of AddTaskForm.
                 padding: const EdgeInsets.only(
                     top: 10.0, bottom: 10.0, left: 15.0, right: 15.0),
-                color: Colors.deepOrangeAccent.shade200,
+                color: bgColor,
                 child: Column(
                   children: <Widget>[
-                    TextField(
-                        controller: titleController,
-                        decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: '제목'
-                        )
-                    ),
-                    FloatingActionButton(
-                        child: const Icon(Icons.print),
-                        onPressed: () async {
-                          dev.log('Re-render after 3 seconds...');
-                          await Future.delayed(3.seconds);
-                          dev.log(titleController.text);
-                          titleController.clear();
-                          render();
-                          // widget.refreshCallBack();
-                        }
-                    )
+                    // Row(
+                    //   children: <Widget>[
+                    //     IconButton(
+                    //       icon: Icon(Icons.menu, color: Colors.white),
+                    //       onPressed: () {},
+                    //     ),
+                    //     TextField(
+                    //       controller: titleController,
+                    //
+                    //       // decoration: const InputDecoration(
+                    //       //   border:
+                    //       // )
+                    //     )
+                    //   ]
+                    // ),
+                    DurationPicker(datemode, setDuration),
+                    // TextField(
+                    //     controller: titleController,
+                    //     decoration: const InputDecoration(
+                    //         border: OutlineInputBorder(),
+                    //         labelText: '제목'
+                    //     )
+                    // ),
+                    // FloatingActionButton(
+                    //     child: const Icon(Icons.print),
+                    //     onPressed: () async {
+                    //       dev.log('Re-render after 3 seconds...');
+                    //       await Future.delayed(3.seconds);
+                    //       dev.log(titleController.text);
+                    //       titleController.clear();
+                    //       render();
+                    //       // widget.refreshCallBack();
+                    //     }
+                    // )
                   ],
                 ),
               ),
