@@ -6,7 +6,14 @@ extension Formating on int {
   String get f2 => this<10 ? '0$this' : toString();
 }
 extension TimeParse on TimeOfDay {
-  String get toStr12 => '${hour>12 ? '오후 ${(hour-12).f2}' : '오전 ${hour.f2}'}:${minute.f2}';
+  String get toStr12 {
+    var after = '오전';
+    var target = hour;
+    if (hour>=12) after = '오후';
+    if (hour>12) target -= 12;
+    return '$after ${target.f2}:${minute.f2}';
+  }
+  // String get toStr12 => '${hour>=12 ? '오후 ${(hour-12).f2}' : '오전 ${hour.f2}'}:${minute.f2}';
   String get toStr24 => '${hour.f2}:${minute.f2}';
   String fmt(int mode) {
     return mode==0 ? toStr12 : toStr24;
