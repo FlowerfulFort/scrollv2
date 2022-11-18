@@ -95,21 +95,21 @@ class AddTaskFormState extends State<AddTaskForm> {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        IconButton(
+                        IconButton(   // Menu Button
                           icon: const Icon(Icons.menu, color: Colors.white),
-                          onPressed: () {
+                          onPressed: () { // Expand ContextMenu Handling
                             dev.log('Pressed menu button');
                           },
                         ),
-                        Expanded(child: TextField(
+                        Expanded(child: TextField(  // Input Title
                           controller: titleController,
                           decoration: const InputDecoration(
                             hintText: '제목',
                           ),
                         )),
-                        IconButton(
+                        IconButton(   // ExpandView Button
                           icon: const Icon(Icons.article_outlined, color: Colors.white, size: 36),
-                          onPressed: () {
+                          onPressed: () { //
                             dev.log('Pressed view button');
                           },
                         )

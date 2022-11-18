@@ -24,16 +24,17 @@ class DurationPickerState extends State<DurationPicker> {
   late TimeOfDay _start;
   late TimeOfDay _end;
   late int mode;
-  void _pickStart(TimeOfDay t) {
+  void _pickStart(TimeOfDay t) {  // Callback function for TimePicker
     _start = t;
     widget._sendCallback(_start, _end);
   }
-  void _pickEnd(TimeOfDay t) {
+  void _pickEnd(TimeOfDay t) {    // Callback function for TimePicker
     _end = t;
     widget._sendCallback(_start, _end);
   }
   @override
   void initState() {
+    // State Initialization.
     DateTime n = DateTime.now();
     _start = TimeOfDay.fromDateTime(n);
     _end = TimeOfDay.fromDateTime(n + 30.minutes);
@@ -51,18 +52,18 @@ class DurationPickerState extends State<DurationPicker> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Expanded(
+              Expanded( // TimePicker: start
                 flex: 1,
                 child: Container(
                   margin: const EdgeInsets.only(left: MARGIN_LR),
                   child: TimePicker(_start, mode, _pickStart),
                 ),
               ),
-              Container(
+              Container(  // Arrow Icon
                 // margin: const EdgeInsets.only(left: MARGIN_LR, right: MARGIN_LR),
                 child: const Icon(Icons.arrow_forward_outlined, size: 30, color: Colors.white),
               ),
-              Expanded(
+              Expanded( // TimePicker: end
                 flex: 1,
                 child: Container(
                   margin: const EdgeInsets.only(right: MARGIN_LR),
@@ -121,12 +122,13 @@ class TimePickerState extends State<TimePicker> {
     return TextButton(
       child: Text(_time.fmt(widget._mode), style: boldStyle),
       onPressed: () {
+        /* Open Window to pick time. */
         Future<TimeOfDay?> selected = showTimePicker(context: context, initialTime: _time);
         selected.then((picked) {
           setState(() {
             if (picked != null) {
               _time = picked;
-              widget.callback(picked);
+              widget.callback(picked);  // send to parent state
             }
           });   // setState Callback
         });   // selected.then Callback
