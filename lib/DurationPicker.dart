@@ -42,6 +42,8 @@ class DurationPickerState extends State<DurationPicker> {
   }
   @override
   Widget build(BuildContext context) {
+    const double MARGIN_LR = 16;
+    const double ICON_SIZE = 24;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
@@ -50,12 +52,15 @@ class DurationPickerState extends State<DurationPicker> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TimePicker(_start, mode, _pickStart),
-              const Icon(Icons.arrow_forward_outlined, size: 30, color: Colors.white),
+              Container(
+                margin: const EdgeInsets.only(left: MARGIN_LR, right: MARGIN_LR),
+                child: const Icon(Icons.arrow_forward_outlined, size: 30, color: Colors.white),
+              ),
               TimePicker(_end, mode, _pickEnd),
             ],
           ),
         ),
-        Container(
+        Container(  // 12/24 time selector
           // width: 40,
           // height: 40,
           padding: const EdgeInsets.all(0),
@@ -67,7 +72,7 @@ class DurationPickerState extends State<DurationPicker> {
               });
             },
             style: OutlinedButton.styleFrom(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(6),
               side: const BorderSide(color: Colors.white, width: 3),
               minimumSize: Size.zero,
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,

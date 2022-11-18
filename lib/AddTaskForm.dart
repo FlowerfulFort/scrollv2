@@ -89,26 +89,37 @@ class AddTaskFormState extends State<AddTaskForm> {
               CategoryView(refreshCallBack: render, categoryList: snapshot.data.item1),
               Container(    // body of AddTaskForm.
                 padding: const EdgeInsets.only(
-                    top: 10.0, bottom: 10.0, left: 15.0, right: 15.0),
+                    top: 10.0, bottom: 10.0, left: 5, right: 5),
                 color: bgColor,
                 child: Column(
                   children: <Widget>[
-                    // Row(
-                    //   children: <Widget>[
-                    //     IconButton(
-                    //       icon: Icon(Icons.menu, color: Colors.white),
-                    //       onPressed: () {},
-                    //     ),
-                    //     TextField(
-                    //       controller: titleController,
-                    //
-                    //       // decoration: const InputDecoration(
-                    //       //   border:
-                    //       // )
-                    //     )
-                    //   ]
-                    // ),
-                    DurationPicker(datemode, setDuration),
+                    Row(
+                      children: <Widget>[
+                        IconButton(
+                          icon: const Icon(Icons.menu, color: Colors.white),
+                          onPressed: () {
+                            dev.log('Pressed menu button');
+                          },
+                        ),
+                        Expanded(child: TextField(
+                          controller: titleController,
+                          decoration: const InputDecoration(
+                            hintText: '제목',
+                          ),
+                        )),
+                        IconButton(
+                          icon: const Icon(Icons.article_outlined, color: Colors.white, size: 36),
+                          onPressed: () {
+                            dev.log('Pressed view button');
+                          },
+                        )
+                      ]
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 8),
+                      padding: const EdgeInsets.only(right: 5),
+                      child: DurationPicker(datemode, setDuration),
+                    ),
                     // TextField(
                     //     controller: titleController,
                     //     decoration: const InputDecoration(
