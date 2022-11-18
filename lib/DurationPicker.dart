@@ -42,7 +42,7 @@ class DurationPickerState extends State<DurationPicker> {
   }
   @override
   Widget build(BuildContext context) {
-    const double MARGIN_LR = 16;
+    const double MARGIN_LR = 24;
     const double ICON_SIZE = 24;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -51,12 +51,24 @@ class DurationPickerState extends State<DurationPicker> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TimePicker(_start, mode, _pickStart),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  margin: const EdgeInsets.only(left: MARGIN_LR),
+                  child: TimePicker(_start, mode, _pickStart),
+                ),
+              ),
               Container(
-                margin: const EdgeInsets.only(left: MARGIN_LR, right: MARGIN_LR),
+                // margin: const EdgeInsets.only(left: MARGIN_LR, right: MARGIN_LR),
                 child: const Icon(Icons.arrow_forward_outlined, size: 30, color: Colors.white),
               ),
-              TimePicker(_end, mode, _pickEnd),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  margin: const EdgeInsets.only(right: MARGIN_LR),
+                  child: TimePicker(_end, mode, _pickEnd),
+                ),
+              ),
             ],
           ),
         ),
