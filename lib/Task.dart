@@ -17,13 +17,15 @@ const VEVENT_HEADER = 'BEGIN:VEVENT';
 const VEVENT_FOOTER = 'END:VEVENT';
 class Task {
   static int sequence = 0;  // SEQUENCE를 독립적으로 붙이기 위한 변수.
-  Task(this.title, this.start, this.end, this.color, this.alarm);
-  Task.na(this.title, this.start, this.end, this.color);
+  Task(this.title, this.start, this.end, this.color, [this.chained=-1]);
+  // Task.nochain(this.title, this.start, this.end, this.color, this.chained);
+  // Task.na(this.title, this.start, this.end, this.color);
   String title;   // 타이틀.
   DateTime start; // 시작시간
   DateTime end;   // 종료시간
-  bool? alarm;    // 알람여부
+  // bool? alarm;    // 알람여부
   String color;   // CSS3 Color keyword(색깔을 나타냄과 동시에 카테고리와 직결되는 항목입니다.)
+  int chained;    // -1 == 체인이 없음. 0부터 체인 시퀀스(체인 고유값).
   String get clock => '${start.hour2}:${start.minute2}';    // Task의 시작시간을 문자열로 리턴해주는 디버깅용 getter.
   String get time => '${start.month}/${start.day} $clock';  // Task의 시작날짜와 시간을 문자열로 리턴해주는 디버깅용 getter.
   String get vevent =>  // ICS파일의 VEVENT 항목을 만들어줌.. 나중에 수정될 수 있음.
@@ -33,12 +35,12 @@ class Task {
       'UID:${title.split(RegExp(r'[- /:.]')).join()}_${start.serialize}\n'
       'DTSTART:${start.serialize}\n'
       'DTEND:${end.serialize}\n'
-      'CREATED:${DateTime.now().serialize}\n'
-      'COLOR:$color\n'
+      // 'CREATED:${DateTime.now().serialize}\n'
+      'CATEGORIES:$color\n'
       'LAST-MODIFIED:${DateTime.now().serialize}\n'
       'LOCATION:\n'
       'SEQUENCE:${Task.sequence++}\n'
-      'SUMMARY:$title\n'
+      'SUMMARY:$title $chained\n'
       '$VEVENT_FOOTER\n';
   @override
   String toString() => 'TestTask: $title time: $start ~ $end';
