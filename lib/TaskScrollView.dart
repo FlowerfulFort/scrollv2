@@ -65,6 +65,17 @@ class _TaskScrollViewState extends State<TaskScrollView> {
                         "~ ${DateFormat('a hh:mm', 'ko').format(task.end)}",
                   )))));
     }
+    /* Add Task Button */
+    ret.add(ElevatedButton(
+      onPressed: () {
+        dev.log('AddTask: ${widget.getData()}');
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.grey,
+        minimumSize: const Size.fromHeight(10),
+      ),
+      child: const Icon(Icons.add, color: Colors.white)
+    ));
     return ret;
   }
 
