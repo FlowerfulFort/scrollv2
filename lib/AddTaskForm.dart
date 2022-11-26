@@ -37,7 +37,7 @@ class AddTaskFormState extends State<AddTaskForm> {
     _start = s; _end = e;
   }
   void getData() => {
-    'title': 'test',
+    'title': titleController.value.text,
     'startTime': _start,
     'endTime': _end
   };
