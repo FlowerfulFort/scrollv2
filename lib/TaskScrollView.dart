@@ -101,7 +101,7 @@ class _TaskScrollViewState extends State<TaskScrollView> {
               padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
               alignment: Alignment.center,
               child: Text(
-                DateFormat('dd\nE', 'ko').format(targetDate),
+                DateFormat('MM\ndd\nE', 'ko').format(targetDate),
                 style: TextStyle(
                   color: targetDate.weekday == DateTime.sunday
                       ? Colors.red
