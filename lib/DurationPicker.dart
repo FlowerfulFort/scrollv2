@@ -19,6 +19,8 @@ extension TimeParse on TimeOfDay {
     return mode==0 ? toStr12 : toStr24;
   }
 }
+const p0 = TimeOfDay(hour: 0, minute: 0);
+const p24 = TimeOfDay(hour:23, minute: 59);
 
 class DurationPicker extends StatefulWidget {
   final Function(TimeOfDay, TimeOfDay) _sendCallback;  // send data to parent using callback.
@@ -31,6 +33,7 @@ class DurationPickerState extends State<DurationPicker> {
   late TimeOfDay _start;
   late TimeOfDay _end;
   late int mode;
+  late bool allday;
   void _pickStart(TimeOfDay t) {  // Callback function for TimePicker
     _start = t;
     widget._sendCallback(_start, _end);
@@ -47,11 +50,12 @@ class DurationPickerState extends State<DurationPicker> {
     _end = TimeOfDay.fromDateTime(n + 30.minutes);
     widget._sendCallback(_start, _end);
     mode = widget.mode;
+    allday = false;
   }
   @override
   Widget build(BuildContext context) {
     const double MARGIN_LR = 24;
-    const double ICON_SIZE = 24;
+    const double ICON_SIZE = 30;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
@@ -63,24 +67,24 @@ class DurationPickerState extends State<DurationPicker> {
                 flex: 1,
                 child: Container(
                   margin: const EdgeInsets.only(left: MARGIN_LR),
-                  child: TimePicker(_start, mode, _pickStart),
+                  child: TimePicker(_start, mode, allday, _pickStart),
                 ),
               ),
               Container(  // Arrow Icon
                 // margin: const EdgeInsets.only(left: MARGIN_LR, right: MARGIN_LR),
-                child: const Icon(Icons.arrow_forward_outlined, size: 30, color: Colors.white),
+                child: const Icon(Icons.arrow_forward_outlined, size: ICON_SIZE, color: Colors.white),
               ),
               Expanded( // TimePicker: end
                 flex: 1,
                 child: Container(
                   margin: const EdgeInsets.only(right: MARGIN_LR),
-                  child: TimePicker(_end, mode, _pickEnd),
+                  child: TimePicker(_end, mode, allday, _pickEnd),
                 ),
               ),
             ],
           ),
         ),
-        Container(  // 12/24 time selector
+        Container(  // All-day Switcher.
           // width: 40,
           // height: 40,
           padding: const EdgeInsets.all(0),
@@ -88,17 +92,24 @@ class DurationPickerState extends State<DurationPicker> {
           child: OutlinedButton(
             onPressed: () {
               setState(() {
-                mode = mode==0 ? 1 : 0;
+                allday = !allday;
+                if (allday) {                     // if allday == true,
+                  widget._sendCallback(p0, p24);  // 00:00 - 23:59.
+                } else {
+                  widget._sendCallback(_start, _end);
+                }
+                // mode = mode==0 ? 1 : 0;
               });
             },
             style: OutlinedButton.styleFrom(
               padding: const EdgeInsets.all(6),
               side: const BorderSide(color: Colors.white, width: 3),
+              backgroundColor: allday ? Colors.white : const Color.fromARGB(0, 255, 255, 255),
               minimumSize: Size.zero,
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
-            child: Text((mode==0 ? 12 : 24).toString(),
-              style: normalStyle,
+            child: Text('24',
+              style: (allday ? intaglioStyle : normalStyle),
               maxLines: 1,
             ),
           ),
@@ -111,8 +122,9 @@ class DurationPickerState extends State<DurationPicker> {
 class TimePicker extends StatefulWidget {
   final TimeOfDay _time;
   final int _mode;
+  final bool _allday;
   Function(TimeOfDay) callback;
-  TimePicker(this._time, this._mode, this.callback);
+  TimePicker(this._time, this._mode, this._allday, this.callback);
   @override
   TimePickerState createState() => TimePickerState();
 }
@@ -124,12 +136,30 @@ class TimePickerState extends State<TimePicker> {
     _time = widget._time;
   }
 
+  /*
+  @override
+  void didUpdateWidget(Widget oldWidget) {
+    TimePicker old = oldWidget as TimePicker;
+    dev.log('didupdatewidget: oldwidget: ${old._allday} now: ${widget._allday}');
+    if (!old._allday && (old._allday != widget._allday)) {
+      // allday state changed false to true...
+      widget.callback();  // time update to default time(00:00 - 23:59).
+      return;
+    }
+    if (old._allday && (old._allday != widget._allday)) {
+      // allday state changed true to false...
+      widget.callback(_time); // time update to time in state (start - end).
+      return;
+    }
+  }
+  */
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: Text(_time.fmt(widget._mode), style: boldStyle),
+      child: Text(_time.fmt(widget._mode), style: widget._allday ? disabledStyle : boldStyle),
       onPressed: () {
         /* Open Window to pick time. */
+        if (widget._allday) return;
         Future<TimeOfDay?> selected = showTimePicker(context: context, initialTime: _time);
         selected.then((picked) {
           setState(() {
