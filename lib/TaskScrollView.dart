@@ -25,7 +25,10 @@ class TaskScrollView extends StatefulWidget {
   final DateTime _today = DateTime.now();
   final List<TaskObject> _tasks = [];
 
-  TaskScrollView({required this.refreshCallBack, required this.getData, required this.taskList}) {
+  TaskScrollView(
+      {required this.refreshCallBack,
+      required this.getData,
+      required this.taskList}) {
     _tasks.add(TaskObject('test1', _today.add(Duration(hours: 1)),
         _today.add(Duration(hours: 2))));
     _tasks.add(TaskObject('test2', _today.add(Duration(hours: 3)),
@@ -45,27 +48,46 @@ class _TaskScrollViewState extends State<TaskScrollView> {
     return DefaultTabController(length: 1, child: _buildTab(widget._today));
   }
 
-  List<Widget> getTasksTiles(var tasks) {
+  List<Widget> tasksTiles(var tasks) {
     List<Widget> ret = [];
     for (var task in tasks) {
       ret.add(ElevatedButton(
-          onPressed: () {   // 일단 누르면 log에 일정정보 출력
+          onPressed: () {
+            // 일단 누르면 log에 일정정보 출력
             dev.log('${task.title}: ${task.start} ~ ${task.end}');
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.lightBlue,
-            minimumSize: const Size.fromHeight(30),
-          ),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7.0)),
+              backgroundColor: Colors.lightBlue,
+              padding: const EdgeInsets.all(8)),
           child: Align(
               alignment: Alignment.centerLeft,
-              child: Padding(
-                  padding: EdgeInsets.all(2),
-                  child: Text(
-                    "${task.title}\n${DateFormat('a hh:mm', 'ko').format(task.start)} "
-                        "~ ${DateFormat('a hh:mm', 'ko').format(task.end)}",
-                  )))));
+              child: Text(
+                "${task.title}\n${DateFormat('a hh:mm', 'ko').format(task.start)} "
+                "~ ${DateFormat('a hh:mm', 'ko').format(task.end)}",
+              ))));
+      ret.add(const SizedBox(
+        height: 7,
+      ));
     }
     return ret;
+  }
+
+  Widget taskAddButton(DateTime date) {
+    return OutlinedButton(
+        onPressed: () {
+          setState(() {
+            widget._tasks.add(TaskObject('test3', date.add(Duration(hours: 1)),
+                date.add(Duration(hours: 2))));
+          });
+
+        },
+        style: OutlinedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(17.0),),
+            side: BorderSide(width: 2.0, color: Colors.grey)
+            ),
+        child: const Icon(Icons.add, size: 20, color: Colors.grey));
   }
 
   Widget _buildTab(DateTime today) {
@@ -79,7 +101,7 @@ class _TaskScrollViewState extends State<TaskScrollView> {
               padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
               alignment: Alignment.center,
               child: Text(
-                DateFormat('dd\nE', 'ko').format(targetDate),
+                DateFormat('MM\ndd\nE', 'ko').format(targetDate),
                 style: TextStyle(
                   color: targetDate.weekday == DateTime.sunday
                       ? Colors.red
@@ -91,7 +113,14 @@ class _TaskScrollViewState extends State<TaskScrollView> {
             ),
             Expanded(
               child: Column(
-                children: [...getTasksTiles(widget._tasks)],
+                children: [
+                  const SizedBox(height: 7),
+                  ...tasksTiles(widget._tasks),
+                  Container(
+                      alignment: Alignment.center,
+                      child: taskAddButton(targetDate)),
+                  const SizedBox(height: 4),
+                ],
               ),
             ),
             const SizedBox(width: 15)
@@ -99,7 +128,7 @@ class _TaskScrollViewState extends State<TaskScrollView> {
         );
       },
       separatorBuilder: (BuildContext context, int index) =>
-      const Divider(height: 1.5, color: Color(0xffAAAAAA)),
+          const Divider(thickness: 1.2, height: 1.5, color: Color(0xff999999)),
       anchor: 0.0,
     );
   }
