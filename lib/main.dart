@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       await DataQuery.init();
       await PreferenceMod.initPreference();
     } catch (e) {
-      Fluttertoast.showToast(msg: e.toString());
+      await Fluttertoast.showToast(msg: e.toString());
       exit(1);
     }
     AppPreference app = PreferenceMod.readPreferenceSync();
