@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 const link = 'preference.json';
 const default_hourmod = 0;
 const default_alarm_time = 30;
+const exception_msg = 'Preference was not initiated.';
 class PreferenceMod {
   static late final String _path;
   static bool isInitiated = false;
@@ -18,7 +19,7 @@ class PreferenceMod {
       final plugin = DeviceCalendarPlugin();
       final cals = await plugin.retrieveCalendars();
       late String cal_id;
-      if (cals.isSuccess && cals.data != null) {
+      if (cals.isSuccess && (cals.data != null)) {
         for (var c in cals.data!) {   // default phone calendar.
           if (c.id == '1') {
             cal_id = c.id!;
@@ -29,7 +30,7 @@ class PreferenceMod {
           }
         }
       } else {
-        Fluttertoast.showToast(msg: "Calendar does not exists...");
+        await Fluttertoast.showToast(msg: "Calendar does not exists...");
         exit(1);
       }
       final app = AppPreference(
@@ -37,11 +38,12 @@ class PreferenceMod {
         alarm_time: default_alarm_time,
         hourmod: default_hourmod
       );
-      createPreferenceSync(app);
+      file.writeAsStringSync(jsonEncode(app.toMap));
     }
     isInitiated = true;
   }
   static void createPreferenceSync(AppPreference app) {
+    if (!isInitiated) throw Exception(exception_msg);
     final target = File(_path);
     target.writeAsStringSync(jsonEncode(app.toMap));
   }
@@ -52,6 +54,7 @@ class PreferenceMod {
     // target.writeAsStringSync(jsonEncode(app.toMap));
   }
   static AppPreference readPreferenceSync() {
+    if (!isInitiated) throw Exception(exception_msg);
     final target = File(_path);
     String serialized = target.readAsStringSync();
     return AppPreference.fromJson(serialized);
@@ -65,10 +68,10 @@ class PreferenceMod {
   }
 }
 class AppPreference {
-  late int cal_id;
+  late String cal_id;
   late int alarm_time;
   late int hourmod;
-  AppPreference({required cal_id, required alarm_time, hourmod=0});
+  AppPreference({required this.cal_id, required this.alarm_time, this.hourmod=0});
   AppPreference.fromMap(Map<String, dynamic> m) {
     cal_id = m['cal_id'];
     alarm_time = m['alarm_time'];
