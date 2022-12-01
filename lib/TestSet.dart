@@ -60,7 +60,7 @@ Future<List<Task>> makeTestTask(List<Category> cat, int n) async{
         // rand.nextInt(1).toBool
     );
     list.add(t);
-    dev.log('$t');
+    //dev.log('$t');
   }
   return list;
 }
@@ -83,7 +83,7 @@ Future<List<Task>> makeTestTaskNonCat(int n) async {
         // rand.nextInt(1).toBool
     );
     list.add(t);
-    dev.log('$t');
+    // dev.log('$t');
   }
   return list;
 }
