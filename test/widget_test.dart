@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:infinite_listview/infinite_listview.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
-
+import 'package:scrollv2/SettingPage.dart';
 class TaskObject {
   String? title;
   DateTime? start;
@@ -19,7 +19,7 @@ class ExampleApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: SafeArea(child: ExampleScreen()),
+        body: SafeArea(child: SettingPage()),
         extendBody: true,
       ),
       localizationsDelegates: const [
