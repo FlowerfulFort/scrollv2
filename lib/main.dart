@@ -1,12 +1,26 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:scrollv2/AddTaskForm.dart';
-import 'package:scrollv2/CategoryView.dart';
-import 'package:scrollv2/TaskScrollView.dart';
-
+import 'package:scrollv2/PreferenceModify.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:scrollv2/DataQuery.dart';
+import 'dart:developer' as dev;
 void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
+  Future<AppPreference> readPref() async {
+    try {
+      await DataQuery.init();
+      await PreferenceMod.initPreference();
+    } catch (e) {
+      await Fluttertoast.showToast(msg: e.toString());
+      exit(1);
+    }
+    AppPreference app = PreferenceMod.readPreferenceSync();
+    return app;
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,7 +28,20 @@ class MyApp extends StatelessWidget {
       title: 'Scroll',
       home: Scaffold(
         body: SafeArea(   // 또는, padding을 상태창 높이만큼 주면 됨. MediaQuery.of(context).padding.top;
-          child: AddTaskForm(),
+          child: FutureBuilder(
+            future: readPref(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (!snapshot.hasData) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                Fluttertoast.showToast(msg: 'Error required at calling Preference.');
+                exit(0);
+              } else {
+                return AddTaskForm(snapshot.data);
+              }
+            }
+          )
+          // child: AddTaskForm(),
         ),
         extendBody: true,
       ),

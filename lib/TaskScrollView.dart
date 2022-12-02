@@ -9,26 +9,22 @@ import 'package:infinite_listview/infinite_listview.dart';
 import 'package:intl/intl.dart';
 import 'Task.dart';
 import 'dart:developer' as dev;
-
-class TaskObject {
-  String? title;
-  DateTime? start;
-  DateTime? end;
-
-  TaskObject(this.title, this.start, this.end);
-}
+import 'package:device_calendar/device_calendar.dart';
+import 'package:scrollv2/TaskObject.dart';
+import 'package:scrollv2/DataQuery.dart';
 
 class TaskScrollView extends StatefulWidget {
   final Function refreshCallBack;
   final Function getData;
-  final List<Task> taskList;
+  final String cal_id;
+  // final List<Task> taskList;
   final DateTime _today = DateTime.now();
   final List<TaskObject> _tasks = [];
 
   TaskScrollView(
       {required this.refreshCallBack,
       required this.getData,
-      required this.taskList}) {
+      required this.cal_id}) {
     _tasks.add(TaskObject('test1', _today.add(Duration(hours: 1)),
         _today.add(Duration(hours: 2))));
     _tasks.add(TaskObject('test2', _today.add(Duration(hours: 3)),
@@ -112,16 +108,17 @@ class _TaskScrollViewState extends State<TaskScrollView> {
               ),
             ),
             Expanded(
-              child: Column(
-                children: [
-                  const SizedBox(height: 7),
-                  ...tasksTiles(widget._tasks),
-                  Container(
-                      alignment: Alignment.center,
-                      child: taskAddButton(targetDate)),
-                  const SizedBox(height: 4),
-                ],
-              ),
+              child: dateCell(targetDate),
+              // child: Column(
+              //   children: [
+              //     const SizedBox(height: 7),
+              //     ...tasksTiles(widget._tasks),
+              //     Container(
+              //         alignment: Alignment.center,
+              //         child: taskAddButton(targetDate)),
+              //     const SizedBox(height: 4),
+              //   ],
+              // ),
             ),
             const SizedBox(width: 15)
           ],
@@ -130,6 +127,30 @@ class _TaskScrollViewState extends State<TaskScrollView> {
       separatorBuilder: (BuildContext context, int index) =>
           const Divider(thickness: 1.2, height: 1.5, color: Color(0xff999999)),
       anchor: 0.0,
+    );
+  }
+
+  FutureBuilder dateCell(DateTime target) {
+    return FutureBuilder(
+      future: DataQuery.fetchEvents(widget.cal_id, target),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (!snapshot.hasData) {
+          return Container();
+        } else if (snapshot.hasError) {
+          throw Exception("Fetch Error");
+        } else {
+          return Column(
+            children: [
+              const SizedBox(height: 7),
+              ...tasksTiles(snapshot.data),
+              Container(
+                  alignment: Alignment.center,
+                  child: taskAddButton(target)),
+              const SizedBox(height: 4),
+            ],
+          );
+        }
+      }
     );
   }
 }
