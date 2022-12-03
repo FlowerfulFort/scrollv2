@@ -17,6 +17,7 @@ class TaskScrollView extends StatefulWidget {
   final Function refreshCallBack;
   final Function getData;
   final String cal_id;
+
   // final List<Task> taskList;
   final DateTime _today = DateTime.now();
   final List<TaskObject> _tasks = [];
@@ -53,7 +54,8 @@ class _TaskScrollViewState extends State<TaskScrollView> {
             dev.log('${task.title}: ${task.start} ~ ${task.end}');
           },
           style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7.0)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(7.0)),
               backgroundColor: Colors.lightBlue,
               padding: const EdgeInsets.all(8)),
           child: Align(
@@ -76,13 +78,12 @@ class _TaskScrollViewState extends State<TaskScrollView> {
             widget._tasks.add(TaskObject('test3', date.add(Duration(hours: 1)),
                 date.add(Duration(hours: 2))));
           });
-
         },
         style: OutlinedButton.styleFrom(
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(17.0),),
-            side: BorderSide(width: 2.0, color: Colors.grey)
+              borderRadius: BorderRadius.circular(17.0),
             ),
+            side: BorderSide(width: 2.0, color: Colors.grey)),
         child: const Icon(Icons.add, size: 20, color: Colors.grey));
   }
 
@@ -91,66 +92,78 @@ class _TaskScrollViewState extends State<TaskScrollView> {
       controller: _infiniteController,
       itemBuilder: (BuildContext context, int index) {
         var targetDate = today.add(Duration(days: index));
-        return Row(
+
+        return Column(
           children: [
-            Container(
-              padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-              alignment: Alignment.center,
-              child: Text(
-                DateFormat('MM\ndd\nE', 'ko').format(targetDate),
-                style: TextStyle(
-                  color: targetDate.weekday == DateTime.sunday
-                      ? Colors.red
-                      : Colors.black,
-                  fontSize: 14,
+            if (targetDate.day == 1)
+              SizedBox(
+                  height: 55,
+                  child: DecoratedBox(
+                      decoration: const BoxDecoration(color: Color(0xFF364F4D)),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                            "   ${today.add(Duration(days: index + 1)).month}월",
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 18)),
+                      ))),
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                  alignment: Alignment.center,
+                  child:
+
+                    CircleAvatar(
+                    backgroundColor: index == 0? const Color(0xffffe1b4) : Colors.transparent,
+                    child: Text(
+                      DateFormat('dd\nE', 'ko').format(targetDate),
+                      style: TextStyle(
+                        color: targetDate.weekday == DateTime.sunday
+                            ? Colors.red
+                            : Colors.black,
+                        fontSize: 14,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 ),
-                textAlign: TextAlign.center,
-              ),
+                Expanded(
+                  child: dateCell(targetDate),
+                ),
+                const SizedBox(width: 15)
+              ],
             ),
-            Expanded(
-              child: dateCell(targetDate),
-              // child: Column(
-              //   children: [
-              //     const SizedBox(height: 7),
-              //     ...tasksTiles(widget._tasks),
-              //     Container(
-              //         alignment: Alignment.center,
-              //         child: taskAddButton(targetDate)),
-              //     const SizedBox(height: 4),
-              //   ],
-              // ),
-            ),
-            const SizedBox(width: 15)
           ],
         );
       },
-      separatorBuilder: (BuildContext context, int index) =>
-          const Divider(thickness: 1.2, height: 1.5, color: Color(0xff999999)),
+      separatorBuilder: (BuildContext context, int index) {
+        return const Divider(
+            thickness: 1.2, height: 1.5, color: Color(0xff999999));
+      },
       anchor: 0.0,
     );
   }
 
   FutureBuilder dateCell(DateTime target) {
     return FutureBuilder(
-      future: DataQuery.fetchEvents(widget.cal_id, target),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (!snapshot.hasData) {
-          return Container();
-        } else if (snapshot.hasError) {
-          throw Exception("Fetch Error");
-        } else {
-          return Column(
-            children: [
-              const SizedBox(height: 7),
-              ...tasksTiles(snapshot.data),
-              Container(
-                  alignment: Alignment.center,
-                  child: taskAddButton(target)),
-              const SizedBox(height: 4),
-            ],
-          );
-        }
-      }
-    );
+        future: DataQuery.fetchEvents(widget.cal_id, target),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (!snapshot.hasData) {
+            return Container();
+          } else if (snapshot.hasError) {
+            throw Exception("Fetch Error");
+          } else {
+            return Column(
+              children: [
+                const SizedBox(height: 7),
+                ...tasksTiles(snapshot.data),
+                Container(
+                    alignment: Alignment.center, child: taskAddButton(target)),
+                const SizedBox(height: 4),
+              ],
+            );
+          }
+        });
   }
 }

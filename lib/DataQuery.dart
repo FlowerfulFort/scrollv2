@@ -1,6 +1,7 @@
 import 'package:device_calendar/device_calendar.dart';
 import 'package:scrollv2/TaskObject.dart';
 import 'package:timezone/timezone.dart';
+import 'dart:developer' as dev;
 extension tzparse on TZDateTime {
   DateTime get toDateTime => DateTime(
     year, month, day, hour, minute, second
@@ -39,6 +40,7 @@ class DataQuery {
     );
   }
   static Future<List<TaskObject>> fetchEvents(String cal_id, DateTime fetchDate) async {
+    cal_id = "4"; // 디버그용으로 임시로 지정해줌
     if (!isInitiated) init();
     final res = await _plugin.retrieveEvents(cal_id, makeParam(fetchDate));
     if (!res.isSuccess) throw Exception('RetrieveEvents failed: $fetchDate');
