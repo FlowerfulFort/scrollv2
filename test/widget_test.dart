@@ -19,7 +19,7 @@ class ExampleApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: SafeArea(child: ExampleScreen()),
+        body: SafeArea(child: SettingPage()),
         extendBody: true,
       ),
       localizationsDelegates: const [
