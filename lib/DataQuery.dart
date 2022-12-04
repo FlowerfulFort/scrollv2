@@ -1,8 +1,9 @@
-import 'dart:collection';
-
+import 'dart:io';
 import 'package:device_calendar/device_calendar.dart';
+import 'package:flutter/material.dart';
 import 'package:scrollv2/TaskObject.dart';
 import 'package:timezone/timezone.dart';
+import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'dart:developer' as dev;
 extension tzparse on TZDateTime {
   DateTime get toDateTime => DateTime(
@@ -13,8 +14,11 @@ const Duration oneDay = Duration(days: 1);
 class DataQuery {
   static final DeviceCalendarPlugin _plugin = DeviceCalendarPlugin();
   static final Map<String, List<String>> calMap = {};
+  static final Map<String, String> calMapId = {};
+  static late final String tz;
   static bool isInitiated = false;
   static Future<void> init() async {
+    tz = await FlutterNativeTimezone.getLocalTimezone();
     final perm = await _plugin.hasPermissions();
     if (!perm.isSuccess) {
       throw Exception('Perm Error.');
@@ -44,6 +48,7 @@ class DataQuery {
         calMap[c.accountName!] = <String>[];
       }
       calMap[c.accountName!]?.add(c.id!);
+      if (!(c.isReadOnly!)) calMapId[c.accountName!] = c.id!;
     }
   }
   static RetrieveEventsParams makeParam(DateTime fetchDate) {
@@ -69,4 +74,22 @@ class DataQuery {
       return TaskObject(event.title, event.start!.toDateTime, event.end!.toDateTime);
     }).toList();
   }
+  static Future<void> createEvent(String cal_id, DateTime date, Map<String, dynamic> data) async {
+    // TODO: calMap[cal_id]!"[0]" must be changed later..
+    final Event event = Event(calMapId[cal_id]![0],
+      title: data['title'],
+      start: _time2TZ(date, data['startTime']),
+      end: _time2TZ(date, data['endTime'])
+    );
+    Result<String>? res = await _plugin.createOrUpdateEvent(event);
+    if (!res!.isSuccess) {
+      dev.log('failed to create event');
+    } else {
+      dev.log('created event id: ${res.data}');
+    }
+  }
+  static TZDateTime _time2TZ(DateTime dt, TimeOfDay time) => TZDateTime(
+    getLocation(tz),
+    dt.year, dt.month, dt.day, time.hour, time.minute
+  );
 }

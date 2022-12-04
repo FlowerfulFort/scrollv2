@@ -7,12 +7,10 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_listview/infinite_listview.dart';
 import 'package:intl/intl.dart';
-import 'Task.dart';
 import 'dart:developer' as dev;
-import 'package:device_calendar/device_calendar.dart';
 import 'package:scrollv2/TaskObject.dart';
 import 'package:scrollv2/DataQuery.dart';
-
+import 'package:scrollv2/DateCell.dart';
 class TaskScrollView extends StatefulWidget {
   final Function refreshCallBack;
   final Function getData;
@@ -71,12 +69,11 @@ class _TaskScrollViewState extends State<TaskScrollView> {
 
   Widget taskAddButton(DateTime date) {
     return OutlinedButton(
-        onPressed: () {
-          setState(() {
-            widget._tasks.add(TaskObject('test3', date.add(Duration(hours: 1)),
-                date.add(Duration(hours: 2))));
-          });
-
+        onPressed: () async {
+          final data = widget.getData();
+          dev.log('title: ${data['title']}');
+          dev.log('startTime: ${data['startTime']}');
+          dev.log('endTime: ${data['endTime']}');
         },
         style: OutlinedButton.styleFrom(
             shape: RoundedRectangleBorder(
@@ -108,7 +105,8 @@ class _TaskScrollViewState extends State<TaskScrollView> {
               ),
             ),
             Expanded(
-              child: dateCell(targetDate),
+              child: DateCell(widget.cal_id, targetDate, widget.getData),
+              // child: dateCell(targetDate),
               // child: Column(
               //   children: [
               //     const SizedBox(height: 7),

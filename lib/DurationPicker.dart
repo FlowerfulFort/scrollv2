@@ -32,7 +32,6 @@ class DurationPicker extends StatefulWidget {
 class DurationPickerState extends State<DurationPicker> {
   late TimeOfDay _start;
   late TimeOfDay _end;
-  late int mode;
   late bool allday;
   void _pickStart(TimeOfDay t) {  // Callback function for TimePicker
     _start = t;
@@ -49,7 +48,6 @@ class DurationPickerState extends State<DurationPicker> {
     _start = TimeOfDay.fromDateTime(n);
     _end = TimeOfDay.fromDateTime(n + 30.minutes);
     widget._sendCallback(_start, _end);
-    mode = widget.mode;
     allday = false;
   }
   @override
@@ -67,7 +65,7 @@ class DurationPickerState extends State<DurationPicker> {
                 flex: 1,
                 child: Container(
                   margin: const EdgeInsets.only(left: MARGIN_LR),
-                  child: TimePicker(_start, mode, allday, _pickStart),
+                  child: TimePicker(_start, widget.mode, allday, _pickStart),
                 ),
               ),
               Container(  // Arrow Icon
@@ -78,7 +76,7 @@ class DurationPickerState extends State<DurationPicker> {
                 flex: 1,
                 child: Container(
                   margin: const EdgeInsets.only(right: MARGIN_LR),
-                  child: TimePicker(_end, mode, allday, _pickEnd),
+                  child: TimePicker(_end, widget.mode, allday, _pickEnd),
                 ),
               ),
             ],
