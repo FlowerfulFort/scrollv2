@@ -13,7 +13,7 @@ import 'dart:developer' as dev;
 import 'package:scrollv2/DurationPicker.dart';
 import 'package:device_calendar/device_calendar.dart';
 import 'package:scrollv2/PreferenceModify.dart';
-
+import 'package:scrollv2/SettingPage.dart';
 class AddTaskForm extends StatefulWidget {
   AppPreference app;
   AddTaskForm(this.app);
@@ -21,14 +21,13 @@ class AddTaskForm extends StatefulWidget {
   AddTaskFormState createState() => AddTaskFormState();
 }
 class AddTaskFormState extends State<AddTaskForm> {
+  late AppPreference app;
   TextStyle style = const TextStyle(
     color: Colors.lightGreen,
     fontSize: 35,
   );
   late TimeOfDay _start, _end;
-  late Calendar _calendar;
   final titleController = TextEditingController();
-  late int hourmode;
   /* test data.. */
   void setDuration(TimeOfDay s, TimeOfDay e) {
     _start = s; _end = e;
@@ -42,7 +41,7 @@ class AddTaskFormState extends State<AddTaskForm> {
   @override
   void initState() {
     /* Preference Settings. */
-    hourmode = widget.app.hourmod;
+    app = widget.app;
     // for debugging.
     Timer.periodic(5.seconds, (timer) {
       dev.log('$_start, $_end');
@@ -80,8 +79,16 @@ class AddTaskFormState extends State<AddTaskForm> {
                       children: <Widget>[
                         IconButton(   // Menu Button
                           icon: const Icon(Icons.menu, color: Colors.white),
-                          onPressed: () { // Expand ContextMenu Handling
-                            dev.log('Pressed menu button');
+                          onPressed: () async { // Expand ContextMenu Handling
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => SettingPage(app))
+                            ).then((newapp) {
+                              setState(() {
+                                app = newapp;
+                                PreferenceMod.createPreferenceSync(newapp);
+                              });
+                            });
                           },
                         ),
                         Expanded(child: TextField(  // Input Title
@@ -101,7 +108,7 @@ class AddTaskFormState extends State<AddTaskForm> {
                     Container(
                       margin: const EdgeInsets.only(top: 8),
                       padding: const EdgeInsets.only(right: 5),
-                      child: DurationPicker(hourmode, setDuration),
+                      child: DurationPicker(app.hourmod, setDuration),
                     ),
                   ],
                 ),

@@ -7,12 +7,9 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_listview/infinite_listview.dart';
 import 'package:intl/intl.dart';
-import 'Task.dart';
 import 'dart:developer' as dev;
-import 'package:device_calendar/device_calendar.dart';
 import 'package:scrollv2/TaskObject.dart';
-import 'package:scrollv2/DataQuery.dart';
-
+import 'package:scrollv2/DateCell.dart';
 class TaskScrollView extends StatefulWidget {
   final Function refreshCallBack;
   final Function getData;
@@ -44,48 +41,6 @@ class _TaskScrollViewState extends State<TaskScrollView> {
     return DefaultTabController(length: 1, child: _buildTab(widget._today));
   }
 
-  List<Widget> tasksTiles(var tasks) {
-    List<Widget> ret = [];
-    for (var task in tasks) {
-      ret.add(ElevatedButton(
-          onPressed: () {
-            // 일단 누르면 log에 일정정보 출력
-            dev.log('${task.title}: ${task.start} ~ ${task.end}');
-          },
-          style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7.0)),
-              backgroundColor: Colors.lightBlue,
-              padding: const EdgeInsets.all(8)),
-          child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "${task.title}\n${DateFormat('a hh:mm', 'ko').format(task.start)} "
-                "~ ${DateFormat('a hh:mm', 'ko').format(task.end)}",
-              ))));
-      ret.add(const SizedBox(
-        height: 7,
-      ));
-    }
-    return ret;
-  }
-
-  Widget taskAddButton(DateTime date) {
-    return OutlinedButton(
-        onPressed: () {
-          setState(() {
-            widget._tasks.add(TaskObject('test3', date.add(Duration(hours: 1)),
-                date.add(Duration(hours: 2))));
-          });
-
-        },
-        style: OutlinedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(17.0),),
-            side: BorderSide(width: 2.0, color: Colors.grey)
-            ),
-        child: const Icon(Icons.add, size: 20, color: Colors.grey));
-  }
-
   Widget _buildTab(DateTime today) {
     return InfiniteListView.separated(
       controller: _infiniteController,
@@ -108,17 +63,7 @@ class _TaskScrollViewState extends State<TaskScrollView> {
               ),
             ),
             Expanded(
-              child: dateCell(targetDate),
-              // child: Column(
-              //   children: [
-              //     const SizedBox(height: 7),
-              //     ...tasksTiles(widget._tasks),
-              //     Container(
-              //         alignment: Alignment.center,
-              //         child: taskAddButton(targetDate)),
-              //     const SizedBox(height: 4),
-              //   ],
-              // ),
+              child: DateCell(widget.cal_id, targetDate, widget.getData),
             ),
             const SizedBox(width: 15)
           ],
@@ -127,30 +72,6 @@ class _TaskScrollViewState extends State<TaskScrollView> {
       separatorBuilder: (BuildContext context, int index) =>
           const Divider(thickness: 1.2, height: 1.5, color: Color(0xff999999)),
       anchor: 0.0,
-    );
-  }
-
-  FutureBuilder dateCell(DateTime target) {
-    return FutureBuilder(
-      future: DataQuery.fetchEvents(widget.cal_id, target),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (!snapshot.hasData) {
-          return Container();
-        } else if (snapshot.hasError) {
-          throw Exception("Fetch Error");
-        } else {
-          return Column(
-            children: [
-              const SizedBox(height: 7),
-              ...tasksTiles(snapshot.data),
-              Container(
-                  alignment: Alignment.center,
-                  child: taskAddButton(target)),
-              const SizedBox(height: 4),
-            ],
-          );
-        }
-      }
     );
   }
 }
