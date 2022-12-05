@@ -16,17 +16,11 @@ class TaskScrollView extends StatefulWidget {
   final String cal_id;
   // final List<Task> taskList;
   final DateTime _today = DateTime.now();
-  final List<TaskObject> _tasks = [];
 
   TaskScrollView(
       {required this.refreshCallBack,
       required this.getData,
-      required this.cal_id}) {
-    _tasks.add(TaskObject('test1', _today.add(Duration(hours: 1)),
-        _today.add(Duration(hours: 2))));
-    _tasks.add(TaskObject('test2', _today.add(Duration(hours: 3)),
-        _today.add(Duration(hours: 4))));
-  }
+      required this.cal_id});
 
   _TaskScrollViewState createState() => _TaskScrollViewState();
 }

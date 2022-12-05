@@ -88,6 +88,9 @@ class DataQuery {
       dev.log('created event id: ${res.data}');
     }
   }
+  static List<String> getCalendars() {
+    return calMap.keys.toList();
+  }
   static TZDateTime _time2TZ(DateTime dt, TimeOfDay time) => TZDateTime(
     getLocation(tz),
     dt.year, dt.month, dt.day, time.hour, time.minute

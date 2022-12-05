@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scrollv2/PreferenceModify.dart';
-
+import 'package:scrollv2/DataQuery.dart';
 class SettingPage extends StatefulWidget{
   AppPreference app;
   SettingPage(this.app);
@@ -80,6 +80,10 @@ class SettingPageState extends State<SettingPage> {
                       trailing: DropdownButton(
                         items: const [
                           DropdownMenuItem(
+                            value: "-1",
+                            child: Text("알리지 않음"),
+                          ),
+                          DropdownMenuItem(
                             value: "10",
                             child: Text("10분 전"),
                           ),
@@ -91,6 +95,10 @@ class SettingPageState extends State<SettingPage> {
                             value: "60",
                             child: Text("1시간 전"),
                           ),
+                          DropdownMenuItem(
+                            value: "120",
+                            child: Text("2시간 전"),
+                          ),
                         ], value: app.alarm_time.toString(),
                         onChanged: (String? value) {
                           setState(() {
@@ -98,40 +106,45 @@ class SettingPageState extends State<SettingPage> {
                           });
                         }
                       ),
-                      onTap: () {
-                        Navigator.pop(context);
-                      }
                     ),
                   ],
                 )
               ),
               Container(
-                  decoration: const BoxDecoration(
-                      border: Border(bottom: BorderSide(color: Colors.black))
+                decoration: const BoxDecoration(
+                    border: Border(bottom: BorderSide(color: Colors.black))
+                ),
+                child: PopupMenuButton(
+                  child: const ListTile(
+                    title: Text("표시 캘린더 변경",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                      ),
+                    ),
+                    subtitle: Text("화면에 표시될 캘린더를 변경합니다.",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 10,
+                      ),
+                    )
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ListTile(
-                          title: const Text("표시 캘린더 변경",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                            ),
-                          ),
-                          subtitle: const Text("화면에 표시될 캘린더를 변경합니다.",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10,
-                            ),
-                          ),
-                          onTap: () {
-                            Navigator.pop(context);
-                          }
-                      )
-                    ],)
+                  itemBuilder: (BuildContext context) {
+                    final keys = DataQuery.getCalendars();
+                    return keys.map((c) {
+                      return PopupMenuItem<String>(
+                        value: c,
+                        child: Text(c)
+                      );
+                    }).toList();
+                  },
+                  onSelected: (String value) {
+                    app.cal_id = value;
+                  }
+                )
               ),
-            ],),
+            ],
+          ),
         )
       ),
     );
