@@ -61,6 +61,14 @@ class DateCellState extends State<DateCell> {
       child: const Icon(Icons.add, size: 20, color: Colors.grey));
   }
   @override
+  void didUpdateWidget(Widget oldWidget) {
+    oldWidget as DateCell;
+    // Auto-update when calender_id changed.
+    if (widget.cal_id != oldWidget.cal_id) {
+      _futureTask = DataQuery.fetchEvents(widget.cal_id, widget.target);
+    }
+  }
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: _futureTask,

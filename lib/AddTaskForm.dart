@@ -46,7 +46,6 @@ class AddTaskFormState extends State<AddTaskForm> {
     Timer.periodic(5.seconds, (timer) {
       dev.log('$_start, $_end');
     });
-    // TODO: to be changed to get parameter from settings.json
   }
 
   @override
