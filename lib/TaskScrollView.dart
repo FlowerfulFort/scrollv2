@@ -46,31 +46,55 @@ class _TaskScrollViewState extends State<TaskScrollView> {
       controller: _infiniteController,
       itemBuilder: (BuildContext context, int index) {
         var targetDate = today.add(Duration(days: index));
-        return Row(
+
+        return Column(
           children: [
-            Container(
-              padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-              alignment: Alignment.center,
-              child: Text(
-                DateFormat('MM\ndd\nE', 'ko').format(targetDate),
-                style: TextStyle(
-                  color: targetDate.weekday == DateTime.sunday
-                      ? Colors.red
-                      : Colors.black,
-                  fontSize: 14,
+            if (targetDate.day == 1)
+              SizedBox(
+                  height: 55,
+                  child: DecoratedBox(
+                      decoration: const BoxDecoration(color: Color(0xFF364F4D)),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                            "   ${today.add(Duration(days: index + 1)).month}월",
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 18)),
+                      ))),
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                  alignment: Alignment.center,
+                  child:
+
+                  CircleAvatar(
+                    backgroundColor: index == 0? const Color(0xffffe1b4) : Colors.transparent,
+                    child: Text(
+                      DateFormat('dd\nE', 'ko').format(targetDate),
+                      style: TextStyle(
+                        color: targetDate.weekday == DateTime.sunday
+                            ? Colors.red
+                            : Colors.black,
+                        fontSize: 14,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 ),
-                textAlign: TextAlign.center,
-              ),
+                Expanded(
+                  child: DateCell(widget.cal_id, targetDate, widget.getData),
+                ),
+                const SizedBox(width: 15)
+              ],
             ),
-            Expanded(
-              child: DateCell(widget.cal_id, targetDate, widget.getData),
-            ),
-            const SizedBox(width: 15)
           ],
         );
       },
-      separatorBuilder: (BuildContext context, int index) =>
-          const Divider(thickness: 1.2, height: 1.5, color: Color(0xff999999)),
+      separatorBuilder: (BuildContext context, int index) {
+        return const Divider(
+            thickness: 1.2, height: 1.5, color: Color(0xff999999));
+      },
       anchor: 0.0,
     );
   }

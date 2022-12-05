@@ -27,7 +27,8 @@ class DateCellState extends State<DateCell> {
             dev.log('${task.title}: ${task.start} ~ ${task.end}');
           },
           style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7.0)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(7.0)),
               backgroundColor: Colors.lightBlue,
               padding: const EdgeInsets.all(8)),
           child: Align(
