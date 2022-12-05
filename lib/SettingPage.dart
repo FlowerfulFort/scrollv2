@@ -80,6 +80,10 @@ class SettingPageState extends State<SettingPage> {
                       trailing: DropdownButton(
                         items: const [
                           DropdownMenuItem(
+                            value: "-1",
+                            child: Text("알리지 않음"),
+                          ),
+                          DropdownMenuItem(
                             value: "10",
                             child: Text("10분 전"),
                           ),
@@ -90,6 +94,10 @@ class SettingPageState extends State<SettingPage> {
                           DropdownMenuItem(
                             value: "60",
                             child: Text("1시간 전"),
+                          ),
+                          DropdownMenuItem(
+                            value: "120",
+                            child: Text("2시간 전"),
                           ),
                         ], value: app.alarm_time.toString(),
                         onChanged: (String? value) {
