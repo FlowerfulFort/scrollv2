@@ -46,6 +46,7 @@ dependencies:
   icalendar_parser: ^1.0.2
   device_calendar: ^4.2.0
   fluttertoast: ^8.1.1
+  flutter_native_timezone: ^2.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

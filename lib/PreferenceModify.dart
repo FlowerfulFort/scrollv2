@@ -23,13 +23,14 @@ class PreferenceMod {
       if (cals.isSuccess && (cals.data != null)) {
         for (var c in cals.data!) {   // default phone calendar.
           if (c.id == '1') {
-            cal_id = c.id!;
+            cal_id = c.accountName!;
           }
           if (c.accountType == 'com.google') {  // high priority to google calendar.
-            cal_id = c.id!;
+            cal_id = c.accountName!;
             break;
           }
         }
+        await Fluttertoast.showToast(msg: "Default account is $cal_id");
       } else {
         await Fluttertoast.showToast(msg: "Calendar does not exists...");
         exit(1);
