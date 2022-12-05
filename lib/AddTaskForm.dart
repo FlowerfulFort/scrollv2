@@ -7,11 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:scrollv2/style.dart';
 import 'package:time/time.dart';
 import 'package:scrollv2/TaskScrollView.dart';
-import 'package:scrollv2/CategoryView.dart';
-import 'package:scrollv2/TestSet.dart';
 import 'dart:developer' as dev;
 import 'package:scrollv2/DurationPicker.dart';
-import 'package:device_calendar/device_calendar.dart';
 import 'package:scrollv2/PreferenceModify.dart';
 import 'package:scrollv2/SettingPage.dart';
 class AddTaskForm extends StatefulWidget {
