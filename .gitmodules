@@ -1,0 +1,4 @@
+[submodule "device_calendar"]
+	path = device_calendar
+	url = https://github.com/builttoroam/device_calendar.git
+	branch = develop
