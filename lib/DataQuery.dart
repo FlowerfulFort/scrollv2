@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:device_calendar/device_calendar.dart';
 import 'package:flutter/material.dart';
-import 'package:scrollv2/TaskObject.dart';
 import 'package:timezone/timezone.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'dart:developer' as dev;
@@ -59,7 +58,7 @@ class DataQuery {
       endDate: end
     );
   }
-  static Future<List<TaskObject>> fetchEvents(String cal_acc, DateTime fetchDate) async {
+  static Future<List<Event>> fetchEvents(String cal_acc, DateTime fetchDate) async {
     if (!isInitiated) init();
     final rawList = <Event>[];
     for (var c in calMap[cal_acc]!) {
@@ -70,9 +69,7 @@ class DataQuery {
     // final res = await _plugin.retrieveEvents(cal_acc, makeParam(fetchDate));
     // if (!res.isSuccess) throw Exception('RetrieveEvents failed: $fetchDate');
     // final rawList = res.data!;
-    return rawList.map((event) {
-      return TaskObject(event.title, event.start!.toDateTime, event.end!.toDateTime);
-    }).toList();
+    return rawList;
   }
   static Future<void> createEvent(String cal_id, DateTime date, Map<String, dynamic> data) async {
     // TODO: calMap[cal_id]!"[0]" must be changed later..

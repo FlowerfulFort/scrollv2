@@ -44,9 +44,11 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   icalendar_parser: ^1.0.2
-  device_calendar: ^4.2.0
+  device_calendar:
+    path: device_calendar
   fluttertoast: ^8.1.1
   flutter_native_timezone: ^2.0.0
+  rrule: ^0.2.10
 dev_dependencies:
   flutter_test:
     sdk: flutter

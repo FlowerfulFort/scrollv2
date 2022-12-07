@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:infinite_listview/infinite_listview.dart';
 import 'package:intl/intl.dart';
 import 'dart:developer' as dev;
-import 'package:scrollv2/TaskObject.dart';
 import 'package:scrollv2/DateCell.dart';
 class TaskScrollView extends StatefulWidget {
   final Function refreshCallBack;

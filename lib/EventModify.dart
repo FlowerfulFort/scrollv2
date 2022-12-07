@@ -6,11 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:intl/intl.dart';
+import 'package:timezone/timezone.dart';
 
-import '../date_time_picker.dart';
-import '../recurring_event_dialog.dart';
-import 'event_attendee.dart';
-import 'event_reminders.dart';
+import 'component/date_time_picker.dart';
+import 'component/recurring_event_dialog.dart';
+import 'component/event_attendee.dart';
+import 'component/event_reminders.dart';
+
 
 enum RecurrenceRuleEndType { Indefinite, MaxOccurrences, SpecifiedEndDate }
 
@@ -20,7 +22,7 @@ class CalendarEventPage extends StatefulWidget {
   final RecurringEventDialog? _recurringEventDialog;
 
   const CalendarEventPage(this._calendar,
-      [this._event, this._recurringEventDialog, Key? key])
+      this._event, [this._recurringEventDialog, Key? key])
       : super(key: key);
 
   @override
@@ -962,41 +964,38 @@ class _CalendarEventPageState extends State<CalendarEventPage> {
           ),
         ),
       ),
-      floatingActionButton: Visibility(
-        visible: _calendar.isReadOnly == false,
-        child: FloatingActionButton(
-          key: const Key('saveEventButton'),
-          onPressed: () async {
-            final form = _formKey.currentState;
-            if (form?.validate() == false) {
-              _autovalidate =
-                  AutovalidateMode.always; // Start validating on every change.
-              showInSnackBar(
-                  context, 'Please fix the errors in red before submitting.');
-            } else {
-              form?.save();
-              _adjustStartEnd();
-              _event?.recurrenceRule = _rrule;
-              // debugPrint('FINAL_RRULE: ${_rrule.toString()}');
-            }
-            _event?.attendees = _attendees;
-            _event?.reminders = _reminders;
-            _event?.availability = _availability;
-            _event?.status = _eventStatus;
-            var createEventResult =
-                await _deviceCalendarPlugin.createOrUpdateEvent(_event);
-            if (createEventResult?.isSuccess == true) {
-              Navigator.pop(context, true);
-            } else {
-              showInSnackBar(
-                  context,
-                  createEventResult?.errors
-                      .map((err) => '[${err.errorCode}] ${err.errorMessage}')
-                      .join(' | ') as String);
-            }
-          },
-          child: const Icon(Icons.check),
-        ),
+      floatingActionButton: FloatingActionButton(
+        key: const Key('saveEventButton'),
+        onPressed: () async {
+          final form = _formKey.currentState;
+          if (form?.validate() == false) {
+            _autovalidate =
+                AutovalidateMode.always; // Start validating on every change.
+            showInSnackBar(
+                context, 'Please fix the errors in red before submitting.');
+          } else {
+            form?.save();
+            _adjustStartEnd();
+            _event?.recurrenceRule = _rrule;
+            // debugPrint('FINAL_RRULE: ${_rrule.toString()}');
+          }
+          _event?.attendees = _attendees;
+          _event?.reminders = _reminders;
+          _event?.availability = _availability;
+          _event?.status = _eventStatus;
+          var createEventResult =
+              await _deviceCalendarPlugin.createOrUpdateEvent(_event);
+          if (createEventResult?.isSuccess == true) {
+            Navigator.pop(context, true);
+          } else {
+            showInSnackBar(
+                context,
+                createEventResult?.errors
+                    .map((err) => '[${err.errorCode}] ${err.errorMessage}')
+                    .join(' | ') as String);
+          }
+        },
+        child: const Icon(Icons.check),
       ),
     );
   }

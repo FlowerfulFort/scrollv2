@@ -2,29 +2,39 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:scrollv2/DataQuery.dart';
 import 'package:intl/intl.dart';
-import 'package:scrollv2/TaskObject.dart';
-import 'dart:developer' as dev;
+import 'package:device_calendar/device_calendar.dart';
+
+import 'EventModify.dart';
 class DateCell extends StatefulWidget {
   String cal_id;
-  DateTime target;
+  DateTime targetDate;
   Function getData;
-  DateCell(this.cal_id, this.target, this.getData);
+  DateCell(this.cal_id, this.targetDate, this.getData);
   @override
   DateCellState createState() => DateCellState();
 }
 class DateCellState extends State<DateCell> {
-  late Future<List<TaskObject>> _futureTask;
+  late Future<List<Event>> _futureTask;
   @override
   void initState() {
-    _futureTask = DataQuery.fetchEvents(widget.cal_id, widget.target);
+    _futureTask = DataQuery.fetchEvents(widget.cal_id, widget.targetDate);
   }
-  List<Widget> tasksTiles(var tasks) {
+  List<Widget> tasksTiles(var events) {
     List<Widget> ret = [];
-    for (var task in tasks) {
+    for (Event event in events) {
       ret.add(ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
             // 일단 누르면 log에 일정정보 출력
-            dev.log('${task.title}: ${task.start} ~ ${task.end}');
+            await Navigator.push(context,
+            MaterialPageRoute(builder: (BuildContext context){
+              return CalendarEventPage(
+                Calendar(id:widget.cal_id, isReadOnly: false),
+                event,
+              );
+            }));
+            setState(() {
+              _futureTask = DataQuery.fetchEvents(widget.cal_id, widget.targetDate);
+            });
           },
           style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
@@ -34,8 +44,8 @@ class DateCellState extends State<DateCell> {
           child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "${task.title}\n${DateFormat('a hh:mm', 'ko').format(task.start)} "
-                    "~ ${DateFormat('a hh:mm', 'ko').format(task.end)}",
+                "${event.title}\n${DateFormat('a hh:mm', 'ko').format(event.start!.toDateTime)} "
+                    "~ ${DateFormat('a hh:mm', 'ko').format(event.end!.toDateTime)}",
               ))));
       ret.add(const SizedBox(
         height: 7,
@@ -47,9 +57,9 @@ class DateCellState extends State<DateCell> {
     return OutlinedButton(
       onPressed: () async {
         final data = widget.getData();
-        DataQuery.createEvent(widget.cal_id, widget.target, data).then((param) {
+        DataQuery.createEvent(widget.cal_id, widget.targetDate, data).then((param) {
           setState(() {
-            _futureTask = DataQuery.fetchEvents(widget.cal_id, widget.target);
+            _futureTask = DataQuery.fetchEvents(widget.cal_id, widget.targetDate);
           });
         });
       },
@@ -65,7 +75,7 @@ class DateCellState extends State<DateCell> {
     oldWidget as DateCell;
     // Auto-update when calender_id changed.
     if (widget.cal_id != oldWidget.cal_id) {
-      _futureTask = DataQuery.fetchEvents(widget.cal_id, widget.target);
+      _futureTask = DataQuery.fetchEvents(widget.cal_id, widget.targetDate);
     }
   }
   @override
@@ -93,3 +103,4 @@ class DateCellState extends State<DateCell> {
     );
   }
 }
+
