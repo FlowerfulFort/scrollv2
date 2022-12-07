@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:intl/intl.dart';
 import 'package:timezone/timezone.dart';
-
+import 'package:scrollv2/DataQuery.dart';
 import 'component/date_time_picker.dart';
 import 'component/recurring_event_dialog.dart';
 import 'component/event_attendee.dart';
@@ -940,7 +940,7 @@ class _CalendarEventPageState extends State<CalendarEventPage> {
                       bool? result = true;
                       if (!(_rrule != null)) {
                         await _deviceCalendarPlugin.deleteEvent(
-                            _calendar.id, _event?.eventId);
+                            DataQuery.calMapId[_calendar.id], _event?.eventId);
                       } else {
                         result = await showDialog<bool>(
                             context: context,
